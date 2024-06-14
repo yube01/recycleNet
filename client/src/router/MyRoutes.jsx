@@ -4,6 +4,7 @@ import Buy from "../pages/Buy"
 import List from "../pages/List"
 import NotFound from "../pages/NotFound"
 import Login from "../pages/Login"
+import Register from "../pages/Register"
 export default function MyRoutes() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ export default function MyRoutes() {
         <Route path ="/buy" element={<Buy/>}/>
         <Route path ="/list" element={<List/>}/>
         <Route path ="/login" element={<Login/>}/>
+        <Route path ="/register" element={<Register/>}/>
         
 
         <Route path = "*" element={<NotFound/>}/>
