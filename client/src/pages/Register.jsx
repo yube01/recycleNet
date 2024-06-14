@@ -1,41 +1,53 @@
-import axios from 'axios';
+import axios from "axios";
 import { Formik, Field, Form } from "formik";
-import { TextField, RadioGroup, FormControlLabel, Radio } from '@mui/material';
-import * as Yup from 'yup';
-import Button from '@mui/material/Button';
-
+import { TextField, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import * as Yup from "yup";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const initialValues = {
-  name:"",
-    email: "",
-    password: "",
-    phone: "",
-    address: "",
-    userType: ""
+  name: "",
+  email: "",
+  password: "",
+  phone: "",
+  address: "",
+  userType: "",
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Required'),
-    email: Yup.string().email("Invalid Email Format").required('Required'),
-    password: Yup.string().required("Required"),
-    phone: Yup.string()
-        .matches(/^[0-9]{10}$/, "Must be exactly 10 digits")
-        .required("Required"),
-    address: Yup.string().required("Required"),
-    userType: Yup.string().oneOf(['buyer', 'seller'], 'Required').required('Required')
+  name: Yup.string().required("Required"),
+  email: Yup.string().email("Invalid Email Format").required("Required"),
+  password: Yup.string().required("Required"),
+  phone: Yup.string()
+    .matches(/^[0-9]{10}$/, "Must be exactly 10 digits")
+    .required("Required"),
+  address: Yup.string().required("Required"),
+  userType: Yup.string()
+    .oneOf(["buyer", "seller"], "Required")
+    .required("Required"),
 });
 
 export default function Register() {
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("id")) {
+      navigate("/home");
+    }
+  }, [navigate]);
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.post("http://localhost:9000/auth/register", values, {
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "http://localhost:9000/auth/register",
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
-      
-      console.log('Response:', response.data);
+      );
 
+      console.log("Response:", response.data);
+      navigate("/login");
     } catch (error) {
       console.error("Api call Error: ", error);
     }
@@ -50,7 +62,7 @@ export default function Register() {
       >
         {({ errors, touched }) => (
           <Form>
-                      <Field
+            <Field
               as={TextField}
               id="name"
               name="name"
@@ -119,7 +131,7 @@ export default function Register() {
               )}
             </Field>
             {touched.userType && errors.userType && (
-              <div style={{ color: 'red' }}>{errors.userType}</div>
+              <div style={{ color: "red" }}>{errors.userType}</div>
             )}
             <Button type="submit" variant="outlined">
               Register
