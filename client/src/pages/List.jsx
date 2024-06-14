@@ -21,8 +21,24 @@ const BiodegradableProductForm = () => {
     expirationDate: Yup.date().required("Required").nullable(),
   });
 
-  const handleSubmit = (values) => {
-    console.log("values", values);
+  const id = localStorage.getItem("id");
+  console.log(id);
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:9000/auth/product/addProduct/",
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Api call Error: ", error);
+    }
   };
 
   return (
