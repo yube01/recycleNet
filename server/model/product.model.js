@@ -11,10 +11,13 @@ const product = new mongoose.Schema({
         required:true
     },
     address:{
-        type:String
+        type:String,
+        required:false
     },
     contact:{
-        type:Number
+        type:Number,
+        required:false
+
     },
     categoryName:{
         type:String,
@@ -25,10 +28,12 @@ const product = new mongoose.Schema({
         required:true
     },
     expiryDate:{
-        type:String
+        type:String,
+        required:false
+
     }
 },{
     timestamps:true
 })
 
-export const User = mongoose.model("Product",product)
+export const Product = mongoose.model("Products",product)
