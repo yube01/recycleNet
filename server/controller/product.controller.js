@@ -1,4 +1,4 @@
-import { Product } from "../model/product.model"
+import { Product } from "../model/product.model.js"
 
 export const product = async(req,res)=>{
 
@@ -6,11 +6,6 @@ export const product = async(req,res)=>{
 
 
     try {
-
-        const salt = bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync(password,salt)
-
-
         const newUser = new Product({productName,quantity,address,contact,categoryName,userId,expiryDate})
 
         const user = await newUser.save()
