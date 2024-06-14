@@ -5,6 +5,7 @@ import Sidebar from "../components/SideBar";
 export default function Home() {
   return (
     <>
+      <Navbar />
       <ProductCard />
     </>
   );
