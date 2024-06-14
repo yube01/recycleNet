@@ -2,6 +2,8 @@ import { Formik, Field, Form } from "formik";
 import { TextField } from "@mui/material";
 import * as Yup from "yup";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const initialValues = {
   email: "",
@@ -14,21 +16,30 @@ const validationSchema = Yup.object({
 });
 
 export default function Login() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (localStorage.getItem('id')) {
+          navigate('/home');
+        }
+      }, [navigate]);
   const handleSubmit = async (values) => {
     try {
-      const response = await fetch("", {
+      const response = await fetch("http://localhost:9000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       });
-      await response.json();
-      console.log(response);
+      const data = await response.json();
+      console.log(data);
+      localStorage.setItem('id',JSON.stringify(data));
+      navigate('/home');
+      console.log("values", values);
+      
     } catch (error) {
       console.error("Api call  Error: ", error);
     }
-    console.log("values", values);
   };
 
   return (
