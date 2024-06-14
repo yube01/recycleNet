@@ -1,3 +1,4 @@
+import { truncateSync } from "fs"
 import mongoose from "mongoose"
 
 
@@ -5,6 +6,10 @@ const product = new mongoose.Schema({
     productName:{
         type:String,
         required:true
+    },
+    productImage:{
+type:String,
+required:true
     },
     quantity:{
         type:Number,

@@ -1,14 +1,16 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 
 const BiodegradableProductForm = () => {
+  const [image, setImage] = useState(null);
   const initialValues = {
     name: "",
     category: "",
     weight: "",
     expirationDate: "",
+    productImage:image
   };
 
   const validationSchema = Yup.object({
@@ -25,6 +27,10 @@ const BiodegradableProductForm = () => {
     console.log("values", values);
   };
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+    console.log(image)
+};
   return (
     <Formik
       initialValues={initialValues}
@@ -83,6 +89,7 @@ const BiodegradableProductForm = () => {
             helperText={touched.expirationDate && errors.expirationDate}
             fullWidth
           />
+          <input type="file" onChange={handleImageChange} required />
           <Button type="submit" variant="contained">
             Submit
           </Button>

@@ -1,6 +1,12 @@
 import { Product } from "../model/product.model.js"
+import multer from "multer"
+import fs from "fs"
+import path from "path"
+
+
 
 export const product = async(req,res)=>{
+    
 
     const{productName,quantity,address,contact,categoryName,userId,expiryDate} = req.body;
 
