@@ -5,6 +5,7 @@ import List from "../pages/List"
 import NotFound from "../pages/NotFound"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
+import View from "../pages/View"
 export default function MyRoutes() {
   return (
     <BrowserRouter>
@@ -15,7 +16,7 @@ export default function MyRoutes() {
         <Route path ="/list" element={<List/>}/>
         <Route path ="/login" element={<Login/>}/>
         <Route path ="/register" element={<Register/>}/>
-        
+        <Route path = "/view/:id" element={<View/>}/>
 
         <Route path = "*" element={<NotFound/>}/>
 
