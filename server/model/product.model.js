@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Product = new mongoose.Schema(
+const product = new mongoose.Schema(
   {
     productName: {
       type: String,
@@ -12,9 +12,11 @@ const Product = new mongoose.Schema(
     },
     address: {
       type: String,
+      required: false,
     },
     contact: {
       type: Number,
+      required: false,
     },
     categoryName: {
       type: String,
@@ -26,6 +28,7 @@ const Product = new mongoose.Schema(
     },
     expiryDate: {
       type: String,
+      required: false,
     },
   },
   {
@@ -33,4 +36,4 @@ const Product = new mongoose.Schema(
   }
 );
 
-export const User = mongoose.model("Product", product);
+export const Product = mongoose.model("Products", product);

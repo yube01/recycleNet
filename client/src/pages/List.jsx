@@ -1,5 +1,4 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 
@@ -21,24 +20,29 @@ const BiodegradableProductForm = () => {
     expirationDate: Yup.date().required("Required").nullable(),
   });
 
-  const id = localStorage.getItem("id");
-  console.log(id);
   const handleSubmit = async (values) => {
+    const id = JSON.parse(localStorage.getItem("id"))._id;
+    const sendData = {
+      userId: id,
+      quantity: values.weight,
+      categoryName: values.category,
+      expiryDate: values.expirationDate,
+      productName: values.name,
+    };
     try {
-      const response = await axios.post(
-        "http://localhost:9000/auth/product/addProduct/",
-        values,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Response:", response.data);
+      const response = await fetch("http://localhost:9000/product/addProduct", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sendData),
+      });
+      const data = await response.json();
+      console.log(data);
     } catch (error) {
-      console.error("Api call Error: ", error);
+      console.log("error", error);
     }
+    console.log("values", values);
   };
 
   return (

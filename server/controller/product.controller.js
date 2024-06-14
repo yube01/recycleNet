@@ -12,9 +12,6 @@ export const product = async (req, res) => {
   } = req.body;
 
   try {
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
-
     const newUser = new Product({
       productName,
       quantity,
