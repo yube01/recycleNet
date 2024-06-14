@@ -3,6 +3,7 @@ import Home from "../pages/Home"
 import Buy from "../pages/Buy"
 import List from "../pages/List"
 import NotFound from "../pages/NotFound"
+import Login from "../pages/Login"
 export default function MyRoutes() {
   return (
     <BrowserRouter>
@@ -11,6 +12,8 @@ export default function MyRoutes() {
         <Route path="/home" element={<Home/>}/>
         <Route path ="/buy" element={<Buy/>}/>
         <Route path ="/list" element={<List/>}/>
+        <Route path ="/login" element={<Login/>}/>
+        
 
         <Route path = "*" element={<NotFound/>}/>
 
