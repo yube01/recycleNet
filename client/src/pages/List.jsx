@@ -21,28 +21,26 @@ const BiodegradableProductForm = () => {
   });
 
   const handleSubmit = async (values) => {
-    const id = JSON.parse(localStorage.getItem('id'))._id
+    const id = JSON.parse(localStorage.getItem("id"))._id;
     const sendData = {
       userId: id,
-      quantity:values.weight,
+      quantity: values.weight,
       categoryName: values.category,
       expiryDate: values.expirationDate,
-      productName: values.name
-    }
+      productName: values.name,
+    };
     try {
-      const response = await fetch("http://localhost:9000/product/addProduct",
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':'application/json', 
-          },
-          body: JSON.stringify(sendData)
-        }
-      )
+      const response = await fetch("http://localhost:9000/product/addProduct", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sendData),
+      });
       const data = await response.json();
-      console.log(data)
+      console.log(data);
     } catch (error) {
-      console.log('error',error)
+      console.log("error", error);
     }
     console.log("values", values);
   };
