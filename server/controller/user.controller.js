@@ -6,7 +6,7 @@ import { User } from "../model/user.model.js";
 
 export const register = async(req,res)=>{
 
-    const{name,email,password} = req.body;
+    const{name,email,password,phone,userType,address} = req.body;
     const edata = await User.findOne({email})
     if(edata) return res.status(500).json("This email is already used")
 
@@ -17,7 +17,7 @@ export const register = async(req,res)=>{
         const hash = bcrypt.hashSync(password,salt)
 
 
-        const newUser = new User({name,email,password:hash})
+        const newUser = new User({name,email,password:hash,phone,userType,address})
 
         const user = await newUser.save()
         res.status(200).json("User created")
