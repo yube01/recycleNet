@@ -5,21 +5,23 @@ import * as Yup from 'yup';
 import Button from '@mui/material/Button';
 
 const initialValues = {
+  name:"",
     email: "",
     password: "",
     phone: "",
     address: "",
-    user_type: ""
+    userType: ""
 };
 
 const validationSchema = Yup.object({
+  name: Yup.string().required('Required'),
     email: Yup.string().email("Invalid Email Format").required('Required'),
     password: Yup.string().required("Required"),
     phone: Yup.string()
         .matches(/^[0-9]{10}$/, "Must be exactly 10 digits")
         .required("Required"),
     address: Yup.string().required("Required"),
-    user_type: Yup.string().oneOf(['buyer', 'seller'], 'Required').required('Required')
+    userType: Yup.string().oneOf(['buyer', 'seller'], 'Required').required('Required')
 });
 
 export default function Register() {
@@ -48,6 +50,16 @@ export default function Register() {
       >
         {({ errors, touched }) => (
           <Form>
+                      <Field
+              as={TextField}
+              id="name"
+              name="name"
+              label="Enter name"
+              variant="outlined"
+              error={touched.name && Boolean(errors.name)}
+              helperText={touched.name && errors.name}
+              fullWidth
+            />
             <Field
               as={TextField}
               id="email"
@@ -90,7 +102,7 @@ export default function Register() {
               helperText={touched.address && errors.address}
               fullWidth
             />
-            <Field name="user_type">
+            <Field name="userType">
               {({ field }) => (
                 <RadioGroup {...field} row>
                   <FormControlLabel
@@ -106,8 +118,8 @@ export default function Register() {
                 </RadioGroup>
               )}
             </Field>
-            {touched.user_type && errors.user_type && (
-              <div style={{ color: 'red' }}>{errors.user_type}</div>
+            {touched.userType && errors.userType && (
+              <div style={{ color: 'red' }}>{errors.userType}</div>
             )}
             <Button type="submit" variant="outlined">
               Register
