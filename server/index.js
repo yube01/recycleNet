@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import authRoute from "./routes/user.route.js"
+import productRoute from "./routes/product.route.js"
 import cors from 'cors'
 
 dotenv.config()
@@ -16,6 +17,7 @@ app.use(express.json())
 
 
 app.use("/auth",authRoute)
+app.use("/product",productRoute)
 
 app.listen(9000,()=>{
     console.log("Server started")
