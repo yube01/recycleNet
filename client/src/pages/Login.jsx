@@ -1,7 +1,7 @@
-import {  Formik, Field, Form } from "formik";
-import {TextField } from '@mui/material';
+import { Formik, Field, Form } from "formik";
+import { TextField } from "@mui/material";
 import * as Yup from "yup";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 const initialValues = {
   email: "",
@@ -14,7 +14,20 @@ const validationSchema = Yup.object({
 });
 
 export default function Login() {
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch("", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      await response.json();
+      console.log(response);
+    } catch (error) {
+      console.error("Api call  Error: ", error);
+    }
     console.log("values", values);
   };
 
