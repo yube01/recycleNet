@@ -1,5 +1,5 @@
 import { Product } from "../model/product.model.js";
-
+import { User } from "../model/user.model.js";
 export const addProduct = async (req, res) => {
   const {
     productName,
@@ -56,11 +56,33 @@ export const getProductByCategory = async (req, res) => {
 export const getProductDetail = async (req, res) => {
   const { productId } = req.params;
 
+
   try {
-    const data = await Product.findById(productId);
-    res.status(200).json(data);
+    // Fetch the product details using the productId
+    const productData = await Product.findById(productId);
+
+    if (!productData) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Fetch the user details using the userId from the productData
+    const userData = await User.findById(productData.userId);
+
+    if (!userData) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Combine the product and user data into a single object
+    const combinedData = {
+      product: productData,
+      user: userData,
+    };
+
+    // Send the combined data as the response
+    res.status(200).json(combinedData);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred' });
   }
 };
 
