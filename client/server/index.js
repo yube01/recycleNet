@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoute from "./routes/user.route.js";
 import productRoute from "./routes/product.route.js";
+import interestRoute from "./routes/interested.route.js"
 import cors from "cors";
 import multer from "multer";
 import path from "path";
@@ -144,6 +145,7 @@ app.post("/send-email/isExpired/:productId", async(req, res) => {
 });
 app.use("/auth", authRoute);
 app.use("/product", productRoute);
+app.use("/interest",interestRoute)
 
 app.listen(9000, () => {
   console.log("Server started");
