@@ -1,7 +1,7 @@
 // Hero.js
 import React from "react";
 import "./Hero.css";
-import recycle from "../assets/recycle.jpg";
+import recycle from "../assets/hero.jpg";
 
 const Hero = () => {
   return (
