@@ -14,7 +14,7 @@ export default function Buy() {
       try {
         const id = JSON.parse(localStorage.getItem("userData"))._id;
         const response = await fetch(
-          `http://localhost:9000/product/`,
+          `http://localhost:9000/product/allSellConfirm`,
           {
             method: "GET",
           }

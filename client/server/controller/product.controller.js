@@ -89,20 +89,12 @@ export const sellConfirm = async (req, res) => {
 export const sellConfirmTrue = async (req, res) => {
   const { cat } = req.params;
   try {
-<<<<<<< HEAD
-=======
-
->>>>>>> 6bc4def35bad45acafe6f5f79243158bf0c199ba
     const data = await Product.find({       $and: [
         { categoryName: cat },
         { sellConfirm: true }
       ]})
     res.status(200).json(data)
   
-<<<<<<< HEAD
-=======
-
->>>>>>> 6bc4def35bad45acafe6f5f79243158bf0c199ba
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Server error' });
@@ -115,5 +107,24 @@ export const allSellConfirmTrue = async(req,res)=>{
 res.status(200).json(data);
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const setListTrue = async(req,res)=>{
+  const {productId} = req.params
+  try {
+    const data = await Product.findByIdAndUpdate(
+      productId,
+      { sellConfirm: true },
+      { new: true }
+    );
+
+    // if (!data) {
+    //   return res.status(404).json({ data});
+    // }
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
   }
 }
