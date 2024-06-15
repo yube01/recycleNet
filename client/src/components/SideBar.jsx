@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Drawer,
   List,
@@ -8,8 +7,11 @@ import {
   Divider,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from '@mui/icons-material/Home';
+import { FaBottleWater } from "react-icons/fa6";
+import { PiToiletPaperFill } from "react-icons/pi";
+import { GiFruiting } from "react-icons/gi";
+import './Sidebar.css';
 
 const Sidebar = () => {
   return (
@@ -28,27 +30,27 @@ const Sidebar = () => {
       <List>
         <ListItem button component={Link} to="/">
           <ListItemIcon>
-            <InboxIcon />
+            <HomeIcon className="icon"/>
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={Link} to="/category1">
+        <ListItem button component={Link} to="/category?name=plastic">
           <ListItemIcon>
-            <MailIcon />
+            <FaBottleWater className="icon" />
           </ListItemIcon>
-          <ListItemText primary="Category 1" />
+          <ListItemText primary="Plastic Waste" />
         </ListItem>
-        <ListItem button component={Link} to="/category2">
+        <ListItem button component={Link} to="/category?name=paper">
           <ListItemIcon>
-            <InboxIcon />
+            <PiToiletPaperFill className="icon" />
           </ListItemIcon>
-          <ListItemText primary="Category 2" />
+          <ListItemText primary="Paper Waste" />
         </ListItem>
-        <ListItem button component={Link} to="/category3">
+        <ListItem button component={Link} to="/category?name=bio">
           <ListItemIcon>
-            <MailIcon />
+            <GiFruiting className="icon" />
           </ListItemIcon>
-          <ListItemText primary="Category 3" />
+          <ListItemText primary="Bio Degradable" />
         </ListItem>
       </List>
       <Divider />
