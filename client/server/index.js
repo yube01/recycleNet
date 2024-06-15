@@ -7,7 +7,7 @@ import interestRoute from "./routes/interested.route.js"
 import cors from "cors";
 import multer from "multer";
 import path from "path";
-import fs from "fs"
+import fs from "fs";
 
 import nodemailer from "nodemailer";
 import { Product } from "./model/product.model.js";
@@ -23,9 +23,9 @@ app.use(
 app.use(express.json());
 const __dirname = path.resolve();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-const uploadDir = path.join(__dirname, 'public', 'uploads');
+const uploadDir = path.join(__dirname, "public", "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -70,24 +70,23 @@ transporter.verify((error, success) => {
 });
 
 // Route to send email
-app.post("/send-email/alert/:productId", async(req, res) => {
-  const { to,subject, text, html } = req.body;
-  const {productId} = req.params
+app.post("/send-email/alert/:productId", async (req, res) => {
+  const { to, subject, text, html } = req.body;
+  const { productId } = req.params;
   try {
     const data = await Product.findByIdAndUpdate(
       productId,
       { isAlerted: true },
       { new: true }
-  );
+    );
 
-  if (!data) {
-      return res.status(404).json({ error: 'Product not found' });
-  }
+    if (!data) {
+      return res.status(404).json({ error: "Product not found" });
+    }
 
-  res.status(200).json(data);
+    res.status(200).json(data);
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
   // Define the email options
   const mailOptions = {
@@ -107,24 +106,23 @@ app.post("/send-email/alert/:productId", async(req, res) => {
   });
 });
 
-app.post("/send-email/isExpired/:productId", async(req, res) => {
-  const { to,subject, text, html } = req.body;
-  const {productId} = req.params
+app.post("/send-email/isExpired/:productId", async (req, res) => {
+  const { to, subject, text, html } = req.body;
+  const { productId } = req.params;
   try {
     const data = await Product.findByIdAndUpdate(
       productId,
       { isExpired: true },
       { new: true }
-  );
+    );
 
-  if (!data) {
-      return res.status(404).json({ error: 'Product not found' });
-  }
+    if (!data) {
+      return res.status(404).json({ error: "Product not found" });
+    }
 
-  res.status(200).json(data);
+    res.status(200).json(data);
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
   // Define the email options
   const mailOptions = {

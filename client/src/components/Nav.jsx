@@ -26,10 +26,14 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">
         <img src={logo} alt="" height="60px" />
-        <a href="/">Recycle Net</a>
+        <h1>
+          <a href="/">
+            Recycle<span className="net">Net</span>
+          </a>
+        </h1>
       </div>
       <div className="nav-menu">
-      <a href="/sellnow" className="nav-item">
+        <a href="/sellnow" className="nav-item">
           Sell Now
         </a>
         <a href="/list" className="nav-item">
@@ -41,7 +45,7 @@ const Navbar = () => {
         {isUserLoggedIn ? (
           <>
             <div className="notification-icon">
-              <NotificationsIcon />
+              <NotificationsIcon style={{ fontSize: 25 }} />
             </div>
             <a href="#" className="nav-item" onClick={handleLogout}>
               Logout
