@@ -1,4 +1,5 @@
-import  { useState } from "react";
+import { useState } from "react";
+import "./Navbar.css";
 import {
   AppBar,
   Toolbar,
@@ -7,7 +8,7 @@ import {
   Badge,
   Menu,
   MenuItem,
-  Button
+  Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -24,10 +25,10 @@ const Navbar = () => {
     setAnchorEl(null);
   };
   const navigate = useNavigate();
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     localStorage.removeItem("id"); // Remove the "id" from localStorage
-    navigate('/login'); // Redirect to the login page
-  }
+    navigate("/login"); // Redirect to the login page
+  };
 
   return (
     <AppBar position="static">
