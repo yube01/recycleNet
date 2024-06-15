@@ -7,8 +7,9 @@ import {
   CardActions,
   Button,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const ProductCard = ({ productName, categoryName, sellerName }) => {
+const ProductCard = ({ productName, categoryName, sellerName,productId }) => {
   return (
     <Card className="product-card">
       <CardContent>
@@ -23,7 +24,11 @@ const ProductCard = ({ productName, categoryName, sellerName }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">View More</Button> {/* Add Link to view product details */}
+        <Button size="small">
+          <Link to={`/view?id=${productId}`}>
+          View More
+          </Link>
+          </Button> {/* Add Link to view product details */}
       </CardActions>
     </Card>
   );

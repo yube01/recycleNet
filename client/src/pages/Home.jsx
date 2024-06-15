@@ -105,13 +105,15 @@ async function isExpiredEmailNotification(productName, daysUntilExpiry,email,pId
       <Nav />
       <div className="home-container">
         <div className="content-container">
-          <div className="grid-container">
+          <div className="flex-container">
             {products.map((product) => (
               <ProductCard
                 key={product._id}
                 productName={product.productName}
                 categoryName={product.categoryName}
-                sellerName={product.sellerName} // Assuming sellerName is available in your data structure
+                sellerName={product.sellerName}
+                productId = {product._id}
+                 // Assuming sellerName is available in your data structure
                 // Add more props as needed based on your data structure
               />
             ))}
