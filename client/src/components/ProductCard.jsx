@@ -1,28 +1,29 @@
+// ProductCard.js
+import React from 'react';
 import {
   Card,
   CardContent,
   Typography,
   CardActions,
   Button,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+} from '@mui/material';
 
-const ProductCard = () => {
+const ProductCard = ({ productName, categoryName, sellerName }) => {
   return (
-    <Card sx={{ maxWidth: 345, margin: "1rem" }}>
+    <Card className="product-card">
       <CardContent>
-        <Typography variant="h4" component="div">
-          Product Name
+        <Typography variant="h5" component="div">
+          {productName}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Category name {/* Category: {category} */}
+        <Typography variant="body2" color="text.secondary">
+          Category: {categoryName}
         </Typography>
-        <Typography variant="body2">Seller: Name </Typography>
-        {/* {sellerName} */}
+        <Typography variant="body2" color="text.secondary">
+          Seller: {sellerName}
+        </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">
-          <Link to={`/view/id:${4}`}>View More</Link></Button>
+        <Button size="small">View More</Button> {/* Add Link to view product details */}
       </CardActions>
     </Card>
   );

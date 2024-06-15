@@ -1,5 +1,5 @@
+// Navbar.js
 import { useState } from "react";
-import "./Navbar.css";
 import {
   AppBar,
   Toolbar,
@@ -24,6 +24,7 @@ const Navbar = () => {
   const handleNotificationClose = () => {
     setAnchorEl(null);
   };
+
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("id"); // Remove the "id" from localStorage
@@ -31,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" className="navbar">
       <Toolbar>
         <Typography
           variant="h6"

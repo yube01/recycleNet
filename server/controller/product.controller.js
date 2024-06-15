@@ -35,7 +35,7 @@ export const getProductById = async(req,res)=>{
   const {userId} = req.params
 
   try {
-    const data = await Product.find({userId})
+    const data = await Product.find(userId)
     res.status(200).json(data)
     
   } catch (error) {

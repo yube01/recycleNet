@@ -29,8 +29,8 @@ const Navbar = () => {
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">
-        <a href="/" className="nav-item">
-          Home
+        <a href="/list" className="nav-item">
+          Add Inventory
         </a>
         <a href="/about" className="nav-item">
           About Us
