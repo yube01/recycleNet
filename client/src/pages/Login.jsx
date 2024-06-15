@@ -16,12 +16,8 @@ const validationSchema = Yup.object({
 });
 
 export default function Login() {
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (localStorage.getItem('id')) {
-          navigate('/home');
-        }
-      }, [navigate]);
+  const navigate = useNavigate();
+
   const handleSubmit = async (values) => {
     try {
       const response = await fetch("http://localhost:9000/auth/login", {
@@ -33,10 +29,14 @@ export default function Login() {
       });
       const data = await response.json();
       console.log(data);
-      localStorage.setItem('id',JSON.stringify(data));
-      navigate('/home');
+      console.log(data.userType);
+      if (data.userType === "buyer") {
+        navigate("/buy");
+      } else if (data.userType === "seller") {
+        navigate("/home");
+      }
+      localStorage.setItem("userData", JSON.stringify(data));
       console.log("values", values);
-      
     } catch (error) {
       console.error("Api call  Error: ", error);
     }

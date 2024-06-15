@@ -1,0 +1,58 @@
+/* Hero.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: #e8f5e9; /* Light green background */
+  color: black; /* Green color for the text */
+  height: 70vh;
+  box-sizing: border-box;
+}
+
+.hero-text {
+  flex: 1;
+  padding-right: 20px;
+  text-align: right; /* Align text to the right */
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  margin: 0;
+  font-weight: 600;
+}
+.hero-text span {
+  color: #4caf50;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 400px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Keyframes for floating animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
