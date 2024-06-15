@@ -20,7 +20,7 @@ const Navbar = () => {
         console.error("Error parsing user data:", error);
       }
     }
-  }, []);
+  }, [JSON.parse(localStorage.getItem("userData"))]);
 
   const handleLogout = () => {
     localStorage.removeItem("userData");

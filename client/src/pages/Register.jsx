@@ -95,7 +95,7 @@ export default function Register() {
       console.log("Response:", response.data);
       navigate("/login");
     } catch (error) {
-      console.error("Api call Error: ", error);
+      console.error("Api call Error: ", error.response.data);
     }
   };
 
