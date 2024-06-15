@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/NavBar";
 import { Typography, CardMedia, Grid, Box, Paper } from "@mui/material";
-import OrganizationImage from "../assets/waste.jpeg"; // Example image path
+import OrganizationImage from "../../../server/uploads/1718411254166.png"; // Example image path
 
 export default function View() {
   return (
@@ -17,7 +17,9 @@ export default function View() {
         <div>
           <h4>Waste Type:</h4>
         </div>
-        <div><h1>organization name</h1></div>
+        <div>
+          <h1>organization name</h1>
+        </div>
       </div>
     </>
   );
