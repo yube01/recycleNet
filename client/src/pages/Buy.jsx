@@ -13,9 +13,12 @@ export default function Buy() {
     const fetchProducts = async () => {
       try {
         const id = JSON.parse(localStorage.getItem("userData"))._id;
-        const response = await fetch(`http://localhost:9000/product/`, {
-          method: "GET",
-        });
+        const response = await fetch(
+          `http://localhost:9000/product/allSellConfirm`,
+          {
+            method: "GET",
+          }
+        );
         const data = await response.json();
         console.log(data);
         setProducts(data); // Update state with fetched product data

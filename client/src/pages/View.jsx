@@ -2,7 +2,7 @@ import axios from "axios";
 import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import "./View.css"; // Import the CSS file
+import { sellConfirm } from "../../server/controller/product.controller";
 
 export default function View() {
   const location = useLocation();
@@ -14,8 +14,13 @@ export default function View() {
 
   // Retrieve userType from localStorage
   const userData = localStorage.getItem("userData");
-  const userType = userData ? JSON.parse(userData).userType : null;
-  console.log(userType);
+  const userType = JSON.parse(userData).userType;
+  console.log("User Type:", userType);
+  let boolCheck = false;
+  if (userType === 'buyer') {
+    boolCheck = true;
+    console.log('checked true')
+  }
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,7 +32,7 @@ export default function View() {
           }
         );
         const data = await response.json();
-        console.log("response", data);
+        console.log("Product Data:", data);
         setProduct(data); // Update state with fetched product data
 
         // Calculate days remaining until expiry if category is 'vegetable-wastes' or 'fruit-wastes'
@@ -57,10 +62,44 @@ export default function View() {
       fetchProduct();
     }
   }, [id]);
-  // console.log(${OrganizationImage}+${product.productImage})
+  
   const handleSellNow = async () => {
     // Implement logic to handle "Sell Now" action
+    const sellItem = {
+      productName :product.productName ,
+      quantity:product.quantity,
+      categoryName:product.categoryName,
+      userId:product.userId,
+      productImage:product.productImage,
+      sellConfirm:true
+    }
+    console.log('Test Object',sellItem)
+    const response = await axios.put(`http://localhost:9000/product/setListTrue/${id}`,{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    console.log('Item Sold',response.data)
     console.log("Sell Now clicked", id);
+  };
+
+  const handleInterested = async () => {
+    const getId = JSON.parse(localStorage.getItem('userData'))._id
+  const values =  {
+    buyerId: getId,
+    sellerId:product.userId,
+    productId:id
+  }
+  console.log("VAles",values)
+    // Implement logic to handle "I'm interested" action
+    const response = await axios.post(`http://localhost:9000/interest/addInterested`,values,{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    console.log('Request Sent',response.data)
+
+    console.log("I'm interested clicked", id);
   };
 
   return (
@@ -122,8 +161,16 @@ export default function View() {
                     )}
                   </>
                 )}
+
+             
               </>
             )}
+               {boolCheck && (
+                  <div>
+                    
+                    <button onClick={handleInterested}>Im interested</button>
+                  </div>
+                )}
           </>
         ) : (
           <p>Loading...</p>
