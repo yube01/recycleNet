@@ -8,7 +8,6 @@ const interested = new mongoose.Schema({
     },
     productId:{
         type:String,
-        unique:true,
         required:true
     },
     sellerId:{

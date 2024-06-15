@@ -2,10 +2,19 @@ import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Nav from '../components/Nav'
+import { useNavigate} from "react-router-dom";
 
 const BiodegradableProductForm = () => {
+  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  console.log(userType)
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userType === 'buyer') {
+      navigate('/buy');
+    }
+  }, [userType, navigate]);
   const [file, setFile] = useState(null);
   const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);

@@ -1,3 +1,4 @@
+import axios from "axios";
 import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -5,24 +6,34 @@ import { useLocation } from "react-router-dom";
 export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const id = searchParams.get('id');
+  const id = searchParams.get("id");
   const [product, setProduct] = useState(null); // State to store product details
-  const userType = JSON.parse(localStorage.getItem('userData')).userType;
   const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
   const [expired, setExpired] = useState(false); // State to track if product is expired
+
+  // Retrieve userType from localStorage
+  const userData = localStorage.getItem("userData");
+  const userType = userData ? JSON.parse(userData).userType : null;
+  console.log(userType);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:9000/product/productDetail/${id}`, {
-          method: 'GET',
-        });
+        const response = await fetch(
+          `http://localhost:9000/product/productDetail/${id}`,
+          {
+            method: "GET",
+          }
+        );
         const data = await response.json();
-        console.log('response', data);
+        console.log("response", data);
         setProduct(data); // Update state with fetched product data
 
         // Calculate days remaining until expiry if category is 'vegetable-wastes' or 'fruit-wastes'
-        if (data.categoryName === 'vegetable-wastes' || data.categoryName === 'fruit-wastes') {
+        if (
+          data.categoryName === "vegetable-wastes" ||
+          data.categoryName === "fruit-wastes"
+        ) {
           const expiryDate = new Date(data.expiryDate);
           const currentDate = new Date();
           const differenceInTime = expiryDate.getTime() - currentDate.getTime();
@@ -37,7 +48,7 @@ export default function View() {
           }
         }
       } catch (error) {
-        console.error('Error fetching product:', error);
+        console.error("Error fetching product:", error);
       }
     };
 
@@ -45,10 +56,31 @@ export default function View() {
       fetchProduct();
     }
   }, [id]);
-// console.log(`${OrganizationImage}+${product.productImage}`)
+
   const handleSellNow = async () => {
     // Implement logic to handle "Sell Now" action
-    console.log('Sell Now clicked', id);
+    console.log("Sell Now clicked", id);
+  };
+
+  const handleInterested = async () => {
+    const buyerid = JSON.parse(userData)._id
+    const sendData = {
+      buyerId: buyerid,
+      sellerId: product.userId,
+      productId: id
+    }
+    console.log(sendData)
+    // Implement logic to handle "Interested" action
+    const response = await axios.post('http://localhost:9000/interest/addInterested', 
+     sendData,{
+      headers: {
+        'Content-Type': 'application/json',
+      }}
+
+    );
+    const data = response.data
+    console.log('REsponse',data);
+    console.log('Interested clicked', id);
   };
 
   return (
@@ -58,7 +90,12 @@ export default function View() {
         {product ? (
           <>
             <div>
-              <img src={`../../server/public/uploads/${product.productImage}`} alt="" height={100} width={100} />
+              <img
+                src={`http://localhost:9000/${product.productImage}`}
+                alt={product.productName}
+                height={100}
+                width={100}
+              />
             </div>
             <div>
               <h1>{product.productName}</h1>
@@ -83,27 +120,30 @@ export default function View() {
               <h4>Updated At:</h4>
               <p>{product.updatedAt}</p>
             </div>
-            {(product.categoryName === 'vegetable-wastes' || product.categoryName === 'fruit-wastes') && (
+            {(product.categoryName === "vegetable-wastes" ||
+              product.categoryName === "fruit-wastes") && (
               <>
                 <div>
                   <h4>Expiry Date:</h4>
                   <p>{product.expiryDate}</p>
                 </div>
-                {userType === 'seller' && (
-                  <>
-                    {expired ? (
-                      <div>
-                        <h4>Product Expired!</h4>
-                        <button onClick={handleSellNow}>Sell Now</button>
-                      </div>
-                    ) : (
-                      <div>
-                        <h4>Days Remaining until Expiry:</h4>
-                        <p>{daysRemaining}</p>
-                      </div>
-                    )}
-                  </>
-                )}
+              </>
+            )}
+            {userType === "seller" ? (
+              expired ? (
+                <div>
+                  <h4>Product Expired!</h4>
+                  <button onClick={handleSellNow}>Sell Now</button>
+                </div>
+              ) : (
+                <div>
+                  <h4>Days Remaining until Expiry:</h4>
+                  <p>{daysRemaining}</p>
+                </div>
+              )
+            ) : (
+              <>
+                <button onClick={handleInterested}>I am intereseted </button>
               </>
             )}
           </>
