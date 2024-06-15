@@ -1,0 +1,9 @@
+/* ProductCard.css */
+.product-card {
+    width: 300px;
+    margin: 1rem;
+    margin-top: 200px;
+    margin-left: 350px;
+    /* z-index: ; Ensure the ProductCard is above Sidebar */
+  }
+  

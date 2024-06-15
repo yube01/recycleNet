@@ -1,56 +1,54 @@
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+// SideBar.js
+import React from 'react';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { Link } from 'react-router-dom';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 import HomeIcon from '@mui/icons-material/Home';
-import { FaBottleWater } from "react-icons/fa6";
-import { PiToiletPaperFill } from "react-icons/pi";
-import { GiFruiting } from "react-icons/gi";
-import './Sidebar.css';
+import { FaBeer } from 'react-icons/fa'; // Corrected import
 
-const Sidebar = () => {
+const SideBar = () => {
   return (
     <Drawer
       variant="permanent"
       sx={{
         width: 240,
         flexShrink: 0,
-        "& .MuiDrawer-paper": {
+        zIndex: 1000, // Ensure sidebar is below the navbar
+        '& .MuiDrawer-paper': {
           width: 240,
-          boxSizing: "border-box",
-          marginTop: "5rem",
+          boxSizing: 'border-box',
+          position: 'fixed',
+          top: '4rem', // Adjust based on navbar height
+          left: 0,
+          height: 'calc(100% - 4rem)',
         },
       }}
     >
       <List>
         <ListItem button component={Link} to="/">
           <ListItemIcon>
-            <HomeIcon className="icon"/>
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={Link} to="/category?name=plastic">
+        <ListItem button component={Link} to="/plasticwaste">
           <ListItemIcon>
-            <FaBottleWater className="icon" />
+            <FaBeer style={{ fontSize: '24px', color: 'inherit' }} />
           </ListItemIcon>
           <ListItemText primary="Plastic Waste" />
         </ListItem>
-        <ListItem button component={Link} to="/category?name=paper">
+        <ListItem button component={Link} to="/paperwaste">
           <ListItemIcon>
-            <PiToiletPaperFill className="icon" />
+            <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="Paper Waste" />
         </ListItem>
-        <ListItem button component={Link} to="/category?name=bio">
+        <ListItem button component={Link} to="/biodegradable">
           <ListItemIcon>
-            <GiFruiting className="icon" />
+            <MailIcon />
           </ListItemIcon>
-          <ListItemText primary="Bio Degradable" />
+          <ListItemText primary="Bio-Degradable Waste" />
         </ListItem>
       </List>
       <Divider />
@@ -58,4 +56,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
