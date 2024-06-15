@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <Nav />
       <div className="home-container">
-        <div className="content-container">
+        {/* <div className="content-container"> */}
           <div className="flex-container">
             {products.map((product) => (
               <ProductCard
@@ -43,7 +43,7 @@ export default function Home() {
               />
             ))}
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );
