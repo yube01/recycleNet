@@ -31,7 +31,9 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">
         <img src={logo} alt="Logo" height="60px" />
-        <a href="/">Recycle Net</a>
+        <a href="/">
+          Recycle<span style={{ color: "black" }}>Net</span>
+        </a>
       </div>
       <div className="nav-menu">
         {userType !== "buyer" && userType && (

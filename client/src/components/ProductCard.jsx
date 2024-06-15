@@ -1,4 +1,3 @@
-// ProductCard.js
 import React from "react";
 import {
   Card,
@@ -6,12 +5,25 @@ import {
   Typography,
   CardActions,
   Button,
+  CardMedia,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ productName, categoryName, sellerName, productId }) => {
+const ProductCard = ({
+  productName,
+  categoryName,
+  sellerName,
+  productId,
+  productImage,
+}) => {
   return (
     <Card className="product-card">
+      <CardMedia
+        component="img"
+        height="140"
+        image={productImage}
+        alt={`${productName}`}
+      />
       <CardContent>
         <Typography variant="h5" component="div">
           {productName}
@@ -26,8 +38,7 @@ const ProductCard = ({ productName, categoryName, sellerName, productId }) => {
       <CardActions>
         <Button size="small">
           <Link to={`/view?id=${productId}`}>View More</Link>
-        </Button>{" "}
-        {/* Add Link to view product details */}
+        </Button>
       </CardActions>
     </Card>
   );
