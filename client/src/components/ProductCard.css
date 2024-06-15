@@ -1,9 +1,59 @@
 /* ProductCard.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
 .product-card {
-    width: 300px;
-    margin: 1rem;
-    margin-top: 200px;
-    margin-left: 350px;
-    /* z-index: ; Ensure the ProductCard is above Sidebar */
-  }
-  
+  width: 300px;
+  border-radius: 4px; /* Adds border radius to the card */
+  overflow: hidden; /* Ensures the border radius applies to the image as well */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better aesthetics */
+  background-color: #fff; /* Background color for the card */
+  font-family: "Poppins", sans-serif;
+}
+
+.product-card img {
+  margin: 0;
+  width: 100%; /* Ensures the image covers the entire width of the div */
+  height: 140px; /* Ensures the image has a fixed height */
+  object-fit: cover; /* Ensures the image covers the div without distortion */
+  /* border-radius: 4px 4px 0 0; Adds border radius to the top of the image */
+}
+
+.product-card-content {
+  padding: 2rem;
+}
+
+.product-card-title {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem 0;
+  color: black;
+}
+
+.product-card-category,
+.product-card-seller {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #329d1d;
+  margin: 0.25rem 0;
+}
+
+.product-card-actions {
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.product-card-button {
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: #535050;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.product-card-button:hover {
+  background-color: #a7a3a3;
+}
+
+.product-card-actions {
+  display: flex;
+  justify-content: end;
+}
