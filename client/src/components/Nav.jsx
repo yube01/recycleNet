@@ -5,25 +5,17 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [userType, setUserType] = useState(null);
 
-  useEffect(() => {
+
+
     // Check if there is user data in localStorage
     const userData = localStorage.getItem("userData");
-    if (userData) {
-      const parsedUserData = JSON.parse(userData);
-      setIsUserLoggedIn(true);
-      setUserType(parsedUserData.userType);
-      console.log('Navbar console', parsedUserData.userType);
-    }
-  }, []);
+    const userType = JSON.parse(userData).userType;
 
   const handleLogout = () => {
     // Remove user data from localStorage
     localStorage.removeItem("userData");
-    setIsUserLoggedIn(false);
-    setUserType(null);
+
   };
 
   return (
@@ -33,7 +25,7 @@ const Navbar = () => {
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">
-        {isUserLoggedIn && userType !== 'buyer' && (
+        {userType !== 'buyer' && (
           <>
             <a href="/sellnow" className="nav-item">
               Sell Now
@@ -46,7 +38,7 @@ const Navbar = () => {
         <a href="/about" className="nav-item">
           About Us
         </a>
-        {isUserLoggedIn ? (
+        {userType ? (
           <>
             <div className="notification-icon">
               <NotificationsIcon />
