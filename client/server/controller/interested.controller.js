@@ -23,12 +23,11 @@ export const addInterested = async(req,res)=>{
 
 
 export const interestedBuyer = async(req,res)=>{
-    const {sellerId} = req.params
+    const {userId} = req.params
     try {
 
-        const data = await Interested.find({sellerId})
+        const data = await Interested.find({sellerId:userId})
         res.status(200).json(data)
-
 
         
     } catch (error) {
