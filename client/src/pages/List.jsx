@@ -59,7 +59,7 @@ const BiodegradableProductForm = () => {
         }
       );
       const filePath = response.data.filePath;
-      const fileName = filePath.split("/").pop();
+      const fileName = filePath.split("\\").pop().split("/").pop();
       console.log("File uploaded successfully:", fileName);
       setUploadedFilePath(fileName);
       setUploading(false);
@@ -162,8 +162,6 @@ const BiodegradableProductForm = () => {
                 </MenuItem>
                 <MenuItem value="vegetable-wastes">Vegetable Wastes</MenuItem>
                 <MenuItem value="fruit-wastes">Fruit Wastes</MenuItem>
-                <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
-                <MenuItem value="other">Other</MenuItem>
               </Field>
               <Field
                 as={TextField}

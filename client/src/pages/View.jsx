@@ -32,10 +32,10 @@ export default function View() {
 
         // Calculate days remaining until expiry if category is 'vegetable-wastes' or 'fruit-wastes'
         if (
-          data.categoryName === "vegetable-wastes" ||
-          data.categoryName === "fruit-wastes"
+          data.product.categoryName === "vegetable-wastes" ||
+          data.product.categoryName === "fruit-wastes"
         ) {
-          const expiryDate = new Date(data.expiryDate);
+          const expiryDate = new Date(data.product.expiryDate);
           const currentDate = new Date();
           const differenceInTime = expiryDate.getTime() - currentDate.getTime();
           const days = Math.ceil(differenceInTime / (1000 * 3600 * 24));
@@ -71,41 +71,41 @@ export default function View() {
           <>
             <div>
               <img
-                src={`../../server/public/uploads/${product.productImage}`}
+                src={`../../server/public/uploads/${product.product.productImage}`}
                 alt=""
                 height={100}
                 width={100}
               />
             </div>
             <div>
-              <h1>{product.productName}</h1>
+              <h1>{product.product.productName}</h1>
             </div>
             <div>
               <h4>Category:</h4>
-              <p>{product.categoryName}</p>
+              <p>{product.product.categoryName}</p>
             </div>
             <div>
               <h4>Quantity:</h4>
-              <p>{product.quantity}</p>
+              <p>{product.product.quantity}</p>
             </div>
             <div>
               <h4>Organization Name:</h4>
-              <p>{product.organizationName}</p>
+              <p>{product.user.name}</p>
             </div>
             <div>
               <h4>Created At:</h4>
-              <p>{product.createdAt}</p>
+              <p>{product.product.createdAt}</p>
             </div>
             <div>
               <h4>Updated At:</h4>
-              <p>{product.updatedAt}</p>
+              <p>{product.product.updatedAt}</p>
             </div>
-            {(product.categoryName === "vegetable-wastes" ||
-              product.categoryName === "fruit-wastes") && (
+            {(product.product.categoryName === "vegetable-wastes" ||
+              product.product.categoryName === "fruit-wastes") && (
               <>
                 <div>
                   <h4>Expiry Date:</h4>
-                  <p>{product.expiryDate}</p>
+                  <p>{product.product.expiryDate}</p>
                 </div>
                 {userType === "seller" && (
                   <>

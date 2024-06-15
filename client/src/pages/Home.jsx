@@ -123,21 +123,22 @@ export default function Home() {
     <>
       <Nav />
       <div className="home-container">
-        {/* <div className="content-container"> */}
-        <div className="flex-container">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              productName={product.productName}
-              categoryName={product.categoryName}
-              sellerName={product.sellerName}
-              productId={product._id}
-              // Assuming sellerName is available in your data structure
-              // Add more props as needed based on your data structure
-            />
-          ))}
+        <div className="content-container">
+          <div className="flex-container">
+            {products.map((product) => (
+              <ProductCard
+                key={product._id}
+                productName={product.productName}
+                categoryName={product.categoryName}
+                // sellerName={product.sellerName}
+                productId={product._id}
+                productImage={product.productImage}
+                // Assuming sellerName is available in your data structure
+                // Add more props as needed based on your data structure
+              />
+            ))}
+          </div>
         </div>
-        {/* </div> */}
       </div>
     </>
   );
