@@ -3,6 +3,9 @@ import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Card from "../components/Card";
 import "./Landing.css";
+import alert from "../assets/alerts.png";
+import connect from "../assets/connects.png";
+import recycle from "../assets/recylces.png";
 
 export default function Landing() {
   return (
@@ -11,19 +14,19 @@ export default function Landing() {
       <Hero />
       <div className="card-container">
         <Card
-          imagePath="path-to-recycle-icon.png"
-          heading="Sustainability"
-          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel mauris eget arcu fermentum congue sed sed libero."
+          imagePath={alert}
+          heading="Alert Expiration"
+          paragraph="Alert before your stocks gets stale."
         />
         <Card
-          imagePath="path-to-recycle-icon.png"
-          heading="Sustainability"
-          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel mauris eget arcu fermentum congue sed sed libero."
+          imagePath={connect}
+          heading="Connect"
+          paragraph="Network with people who find value in your waste.  "
         />
         <Card
-          imagePath="path-to-recycle-icon.png"
-          heading="Sustainability"
-          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel mauris eget arcu fermentum congue sed sed libero."
+          imagePath={recycle}
+          heading="Recycle"
+          paragraph="Reduce the waste and sustain environment."
         />
       </div>
     </>

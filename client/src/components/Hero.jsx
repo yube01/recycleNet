@@ -11,10 +11,14 @@ const Hero = () => {
           <span>Recycle</span>Net
         </h1>
         <p>
-          <b>RecycleNet</b> helps you track and manage your biodegradable
-          materials, preventing waste and expiration. Connect with eco-conscious
-          individuals who can repurpose and recycle your organic waste,
-          contributing to a greener, more sustainable future.
+          <b>
+            <i>RecycleNet </i>
+          </b>
+          helps you track and manage your biodegradable materials, preventing
+          waste and expiration. <br />
+          Connect with eco-conscious individuals who can repurpose and recycle
+          your organic waste, contributing to a greener, more sustainable
+          future.
         </p>
         <div>
           <button className="getStart">Get Started</button>

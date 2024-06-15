@@ -6,7 +6,7 @@ import productRoute from "./routes/product.route.js";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
-import fs from "fs"
+import fs from "fs";
 
 import nodemailer from "nodemailer";
 import { Product } from "./model/product.model.js";
@@ -22,9 +22,9 @@ app.use(
 app.use(express.json());
 const __dirname = path.resolve();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-const uploadDir = path.join(__dirname, 'public', 'uploads');
+const uploadDir = path.join(__dirname, "public", "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
