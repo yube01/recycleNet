@@ -14,6 +14,7 @@ const Navbar = () => {
         const parsedUserData = JSON.parse(userData);
         if (parsedUserData && parsedUserData.userType) {
           setUserType(parsedUserData.userType);
+          console.log(userType);
         }
       } catch (error) {
         console.error("Error parsing user data:", error);
@@ -33,7 +34,7 @@ const Navbar = () => {
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">
-        {userType !== 'buyer' && (
+        {userType !== "buyer" && userType && (
           <>
             <a href="/sellnow" className="nav-item">
               Sell Now
@@ -71,4 +72,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-  

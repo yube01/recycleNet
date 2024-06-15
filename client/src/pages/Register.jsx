@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import image from "../assets/logo.jpg";
+import Nav from "../components/Nav";
 
 const initialValues = {
   name: "",
@@ -100,138 +101,140 @@ export default function Register() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "90vh",
-        backgroundColor: "#E8F5E9",
-      }}
-    >
-      <WhiteBackground>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ errors, touched }) => (
-            <Form style={{ width: "300px" }}>
-              <div style={{ textAlign: "center", marginBottom: "20px" }}>
-                <img
-                  src={image}
-                  alt="Logo"
-                  style={{ width: "100px", height: "100px" }}
-                />
-              </div>
-              <Box mb={2}>
-                <Field
-                  as={GreenTextField}
-                  id="name"
-                  name="name"
-                  label="Enter Name"
-                  variant="outlined"
-                  error={touched.name && Boolean(errors.name)}
-                  helperText={touched.name && errors.name}
-                  fullWidth
-                />
-              </Box>
-              <Box mb={2}>
-                <Field
-                  as={GreenTextField}
-                  id="email"
-                  name="email"
-                  label="Enter Email"
-                  variant="outlined"
-                  error={touched.email && Boolean(errors.email)}
-                  helperText={touched.email && errors.email}
-                  fullWidth
-                />
-              </Box>
-              <Box mb={2}>
-                <Field
-                  as={GreenTextField}
-                  id="password"
-                  name="password"
-                  label="Enter Password"
-                  type="password"
-                  variant="outlined"
-                  error={touched.password && Boolean(errors.password)}
-                  helperText={touched.password && errors.password}
-                  fullWidth
-                />
-              </Box>
-              <Box mb={2}>
-                <Field
-                  as={GreenTextField}
-                  id="phone"
-                  name="phone"
-                  label="Enter Phone Number"
-                  type="text"
-                  variant="outlined"
-                  error={touched.phone && Boolean(errors.phone)}
-                  helperText={touched.phone && errors.phone}
-                  fullWidth
-                />
-              </Box>
-              <Box mb={2}>
-                <Field
-                  as={GreenTextField}
-                  id="address"
-                  name="address"
-                  label="Enter Address"
-                  variant="outlined"
-                  error={touched.address && Boolean(errors.address)}
-                  helperText={touched.address && errors.address}
-                  fullWidth
-                />
-              </Box>
-              <Box mb={2}>
-                <Field name="userType">
-                  {({ field }) => (
-                    <RadioGroup {...field} row>
-                      <FormControlLabel
-                        value="buyer"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "#4CAF50",
-                              "&.Mui-checked": {
-                                color: "#45A049",
-                              },
-                            }}
-                          />
-                        }
-                        label="Buyer"
-                      />
-                      <FormControlLabel
-                        value="seller"
-                        control={
-                          <Radio
-                            sx={{
-                              color: "#4CAF50",
-                              "&.Mui-checked": {
-                                color: "#45A049",
-                              },
-                            }}
-                          />
-                        }
-                        label="Seller"
-                      />
-                    </RadioGroup>
+    <>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "90vh",
+          backgroundColor: "#E8F5E9",
+        }}
+      >
+        <WhiteBackground>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ errors, touched }) => (
+              <Form style={{ width: "300px" }}>
+                <div style={{ textAlign: "center", marginBottom: "20px" }}>
+                  <img
+                    src={image}
+                    alt="Logo"
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                </div>
+                <Box mb={2}>
+                  <Field
+                    as={GreenTextField}
+                    id="name"
+                    name="name"
+                    label="Enter Name"
+                    variant="outlined"
+                    error={touched.name && Boolean(errors.name)}
+                    helperText={touched.name && errors.name}
+                    fullWidth
+                  />
+                </Box>
+                <Box mb={2}>
+                  <Field
+                    as={GreenTextField}
+                    id="email"
+                    name="email"
+                    label="Enter Email"
+                    variant="outlined"
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                    fullWidth
+                  />
+                </Box>
+                <Box mb={2}>
+                  <Field
+                    as={GreenTextField}
+                    id="password"
+                    name="password"
+                    label="Enter Password"
+                    type="password"
+                    variant="outlined"
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}
+                    fullWidth
+                  />
+                </Box>
+                <Box mb={2}>
+                  <Field
+                    as={GreenTextField}
+                    id="phone"
+                    name="phone"
+                    label="Enter Phone Number"
+                    type="text"
+                    variant="outlined"
+                    error={touched.phone && Boolean(errors.phone)}
+                    helperText={touched.phone && errors.phone}
+                    fullWidth
+                  />
+                </Box>
+                <Box mb={2}>
+                  <Field
+                    as={GreenTextField}
+                    id="address"
+                    name="address"
+                    label="Enter Address"
+                    variant="outlined"
+                    error={touched.address && Boolean(errors.address)}
+                    helperText={touched.address && errors.address}
+                    fullWidth
+                  />
+                </Box>
+                <Box mb={2}>
+                  <Field name="userType">
+                    {({ field }) => (
+                      <RadioGroup {...field} row>
+                        <FormControlLabel
+                          value="buyer"
+                          control={
+                            <Radio
+                              sx={{
+                                color: "#4CAF50",
+                                "&.Mui-checked": {
+                                  color: "#45A049",
+                                },
+                              }}
+                            />
+                          }
+                          label="Buyer"
+                        />
+                        <FormControlLabel
+                          value="seller"
+                          control={
+                            <Radio
+                              sx={{
+                                color: "#4CAF50",
+                                "&.Mui-checked": {
+                                  color: "#45A049",
+                                },
+                              }}
+                            />
+                          }
+                          label="Seller"
+                        />
+                      </RadioGroup>
+                    )}
+                  </Field>
+                  {touched.userType && errors.userType && (
+                    <div style={{ color: "red" }}>{errors.userType}</div>
                   )}
-                </Field>
-                {touched.userType && errors.userType && (
-                  <div style={{ color: "red" }}>{errors.userType}</div>
-                )}
-              </Box>
-              <GreenButton type="submit" variant="contained" fullWidth>
-                Register
-              </GreenButton>
-            </Form>
-          )}
-        </Formik>
-      </WhiteBackground>
-    </div>
+                </Box>
+                <GreenButton type="submit" variant="contained" fullWidth>
+                  Register
+                </GreenButton>
+              </Form>
+            )}
+          </Formik>
+        </WhiteBackground>
+      </div>
+    </>
   );
 }
