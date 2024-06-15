@@ -2,9 +2,8 @@ import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
-import { useState,useEffect } from "react";
-import Nav from '../components/Nav'
-import { useNavigate} from "react-router-dom";
+import { useState } from "react";
+import Nav from "../components/Nav";
 
 const BiodegradableProductForm = () => {
   const userType = JSON.parse(localStorage.getItem('userData')).userType;
@@ -69,7 +68,7 @@ const BiodegradableProductForm = () => {
       const fileName = filePath.split("/").pop();
       console.log("File uploaded successfully:", fileName);
       setUploadedFilePath(fileName);
-      console.log(uploadedFilePath)
+      console.log(uploadedFilePath);
       setUploading(false);
       setSuccess(true);
     } catch (err) {
@@ -117,7 +116,6 @@ const BiodegradableProductForm = () => {
 
   return (
     <>
-    <Nav/>
       <div>
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>

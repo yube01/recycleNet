@@ -10,10 +10,17 @@ import Landing from "../pages/Landing";
 import Category from "../pages/Category";
 import Sellnow from "../pages/Sellnow";
 export default function MyRoutes() {
+  const userData = localStorage.getItem("userData");
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
+        <Route
+          path="/"
+          element={
+            userData ? <Navigate to="/home" /> : <Navigate to="/landing" />
+          }
+        />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/list" element={<List />} />
@@ -21,9 +28,8 @@ export default function MyRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/view/" element={<View />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/category/" element={<Category/>}/>
-        <Route path="/sellnow" element={<Sellnow/>}/>
-
+        <Route path="/category/" element={<Category />} />
+        <Route path="/sellnow" element={<Sellnow />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

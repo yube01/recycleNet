@@ -1,5 +1,5 @@
 import express from "express";
-import { addProduct, getProductByCategory, getProductById, getProductDetail, sellConfirm, sellConfirmTrue } from "../controller/product.controller.js";
+import { addProduct, allSellConfirmTrue, getProductByCategory, getProductById, getProductDetail, sellConfirm, sellConfirmTrue } from "../controller/product.controller.js";
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ router.get("/productDetail/:productId", getProductDetail);
 
 
 router.put("/sellConfirm/:productId",sellConfirm)
+router.put("/allSellConfirm/:productId",allSellConfirmTrue)
 router.get("/catSellConfirm/:cat",sellConfirmTrue)
 
 export default router;

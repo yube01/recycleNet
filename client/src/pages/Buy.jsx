@@ -33,7 +33,6 @@ export default function Buy() {
   return (
     <div style={{ dispay: "flex" }}>
       {/* <Navbar /> */}
-      <Nav />
       <div className="home-container">
         <SideBar />
         <div className="content-container">

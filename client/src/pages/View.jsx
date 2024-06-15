@@ -7,7 +7,7 @@ export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-  const [product, setProduct] = useState(null); // State to store product details
+  const [product, setProduct] = useState(null); 
   const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
   const [expired, setExpired] = useState(false); // State to track if product is expired
 
@@ -56,43 +56,21 @@ export default function View() {
       fetchProduct();
     }
   }, [id]);
-
+  // console.log(`${OrganizationImage}+${product.productImage}`)
   const handleSellNow = async () => {
     // Implement logic to handle "Sell Now" action
     console.log("Sell Now clicked", id);
   };
 
-  const handleInterested = async () => {
-    const buyerid = JSON.parse(userData)._id
-    const sendData = {
-      buyerId: buyerid,
-      sellerId: product.userId,
-      productId: id
-    }
-    console.log(sendData)
-    // Implement logic to handle "Interested" action
-    const response = await axios.post('http://localhost:9000/interest/addInterested', 
-     sendData,{
-      headers: {
-        'Content-Type': 'application/json',
-      }}
-
-    );
-    const data = response.data
-    console.log('REsponse',data);
-    console.log('Interested clicked', id);
-  };
-
   return (
     <>
-      <Nav />
       <div className="product-details-container">
         {product ? (
           <>
             <div>
               <img
-                src={`http://localhost:9000/${product.productImage}`}
-                alt={product.productName}
+                src={`../../server/public/uploads/${product.productImage}`}
+                alt=""
                 height={100}
                 width={100}
               />
@@ -127,23 +105,21 @@ export default function View() {
                   <h4>Expiry Date:</h4>
                   <p>{product.expiryDate}</p>
                 </div>
-              </>
-            )}
-            {userType === "seller" ? (
-              expired ? (
-                <div>
-                  <h4>Product Expired!</h4>
-                  <button onClick={handleSellNow}>Sell Now</button>
-                </div>
-              ) : (
-                <div>
-                  <h4>Days Remaining until Expiry:</h4>
-                  <p>{daysRemaining}</p>
-                </div>
-              )
-            ) : (
-              <>
-                <button onClick={handleInterested}>I am intereseted </button>
+                {userType === "seller" && (
+                  <>
+                    {expired ? (
+                      <div>
+                        <h4>Product Expired!</h4>
+                        <button onClick={handleSellNow}>Sell Now</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <h4>Days Remaining until Expiry:</h4>
+                        <p>{daysRemaining}</p>
+                      </div>
+                    )}
+                  </>
+                )}
               </>
             )}
           </>

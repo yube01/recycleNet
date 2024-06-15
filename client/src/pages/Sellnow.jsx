@@ -2,9 +2,8 @@ import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import Nav from '../components/Nav';
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Nav from "../components/Nav";
 
 const Sellnow = () => {
   const userType = JSON.parse(localStorage.getItem('userData')).userType;
@@ -95,6 +94,7 @@ const Sellnow = () => {
       userId: id,
       quantity: values.weight,
       categoryName: values.category,
+
       productName: values.name,
       productImage: uploadedFilePath,
       sellConfirm: true
@@ -117,7 +117,6 @@ const Sellnow = () => {
 
   return (
     <>
-      <Nav />
       <div>
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>
