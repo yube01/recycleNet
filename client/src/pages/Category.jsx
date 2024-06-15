@@ -3,6 +3,7 @@ import Sidebar from "../components/SideBar";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard"; // Assuming ProductCard component is properly defined
+import axios from "axios";
 
 export default function Category() {
   const [searchParams] = useSearchParams();
@@ -13,13 +14,11 @@ export default function Category() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:9000/product/category/${name}`,
-          {
-            method: "GET",
-          }
+        const response = await axios.get(
+          `http://localhost:9000/product/catSellConfirm/${name}`
+
         );
-        const data = await response.json();
+        const data = response.data;
         console.log("response", data);
         // Update state with fetched product data
         setProducts(data);
@@ -41,7 +40,7 @@ export default function Category() {
               key={product._id}
               productName={product.productName}
               categoryName={product.categoryName}
-              sellerName={product.sellerName}
+              // sellerName={product.sellerName}
               productId={product._id}
               // Assuming sellerName is available in your data structure
               // Add more props as needed based on your data structure

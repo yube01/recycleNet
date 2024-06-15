@@ -74,9 +74,9 @@ export const sellConfirm = async (req, res) => {
       { new: true }
     );
 
-    if (!data) {
-      return res.status(404).json({ error: "Product not found" });
-    }
+    // if (!data) {
+    //   return res.status(404).json({ data});
+    // }
 
     res.status(200).json(data);
   } catch (error) {
@@ -84,13 +84,20 @@ export const sellConfirm = async (req, res) => {
   }
 };
 
+
+
 export const sellConfirmTrue = async (req, res) => {
   const { cat } = req.params;
   try {
-    const data = await Product.find({ cat, sellConfirm: true });
-    res.status(200).json(data);
+    const data = await Product.find({ categoryName:cat});
+    if(data){
+      const data1 = await Product.find({sellConfirm: true })
+      res.status(200).json(data1);
+    }
+    
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: 'Server error' });
   }
 }
 
