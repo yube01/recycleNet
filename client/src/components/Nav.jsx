@@ -29,6 +29,9 @@ const Navbar = () => {
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">
+      <a href="/sellnow" className="nav-item">
+          Sell Now
+        </a>
         <a href="/list" className="nav-item">
           Add Inventory
         </a>
