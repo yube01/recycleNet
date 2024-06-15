@@ -104,7 +104,7 @@ async function isExpiredEmailNotification(productName, daysUntilExpiry,email,pId
     <>
       <Nav />
       <div className="home-container">
-        <div className="content-container">
+        {/* <div className="content-container"> */}
           <div className="flex-container">
             {products.map((product) => (
               <ProductCard
@@ -118,7 +118,7 @@ async function isExpiredEmailNotification(productName, daysUntilExpiry,email,pId
               />
             ))}
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );

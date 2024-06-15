@@ -3,6 +3,7 @@ import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
+import Nav from '../components/Nav'
 
 const BiodegradableProductForm = () => {
   const [file, setFile] = useState(null);
@@ -56,9 +57,10 @@ const BiodegradableProductForm = () => {
         }
       );
       const filePath = response.data.filePath;
-      const fileName = filePath.split("\\").pop().split("/").pop();
+      const fileName = filePath.split("/").pop();
       console.log("File uploaded successfully:", fileName);
-      setUploadedFilePath(response.data.fileName);
+      setUploadedFilePath(fileName);
+      console.log(uploadedFilePath)
       setUploading(false);
       setSuccess(true);
     } catch (err) {
@@ -106,6 +108,7 @@ const BiodegradableProductForm = () => {
 
   return (
     <>
+    <Nav/>
       <div>
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>

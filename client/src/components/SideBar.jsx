@@ -32,19 +32,19 @@ const SideBar = () => {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={Link} to="/plasticwaste">
+        <ListItem button component={Link} to="/category?name=vegetable-wastes">
           <ListItemIcon>
             <FaBeer style={{ fontSize: '24px', color: 'inherit' }} />
           </ListItemIcon>
           <ListItemText primary="Plastic Waste" />
         </ListItem>
-        <ListItem button component={Link} to="/paperwaste">
+        <ListItem button component={Link} to="/category?name=fruit-wastes">
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="Paper Waste" />
         </ListItem>
-        <ListItem button component={Link} to="/biodegradable">
+        <ListItem button component={Link} to="/category?name=paper-wastes">
           <ListItemIcon>
             <MailIcon />
           </ListItemIcon>

@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import View from "../pages/View";
 import Landing from "../pages/Landing";
 import Category from "../pages/Category";
+import Sellnow from "../pages/Sellnow";
 export default function MyRoutes() {
   return (
     <BrowserRouter>
@@ -21,6 +22,8 @@ export default function MyRoutes() {
         <Route path="/view/" element={<View />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/category/" element={<Category/>}/>
+        <Route path="/sellnow" element={<Sellnow/>}/>
+
 
         <Route path="*" element={<NotFound />} />
       </Routes>

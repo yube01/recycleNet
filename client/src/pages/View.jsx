@@ -1,13 +1,15 @@
 import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import OrganizationImage from "../../../server/uploads/1718411254166.png"; // Example image path
 
 export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get('id');
   const [product, setProduct] = useState(null); // State to store product details
+  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
+  const [expired, setExpired] = useState(false); // State to track if product is expired
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -18,6 +20,22 @@ export default function View() {
         const data = await response.json();
         console.log('response', data);
         setProduct(data); // Update state with fetched product data
+
+        // Calculate days remaining until expiry if category is 'vegetable-wastes' or 'fruit-wastes'
+        if (data.categoryName === 'vegetable-wastes' || data.categoryName === 'fruit-wastes') {
+          const expiryDate = new Date(data.expiryDate);
+          const currentDate = new Date();
+          const differenceInTime = expiryDate.getTime() - currentDate.getTime();
+          const days = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+          setDaysRemaining(days);
+
+          // Check if product is expired
+          if (expiryDate < currentDate) {
+            setExpired(true);
+          } else {
+            setExpired(false);
+          }
+        }
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -27,6 +45,11 @@ export default function View() {
       fetchProduct();
     }
   }, [id]);
+// console.log(`${OrganizationImage}+${product.productImage}`)
+  const handleSellNow = async () => {
+    // Implement logic to handle "Sell Now" action
+    console.log('Sell Now clicked', id);
+  };
 
   return (
     <>
@@ -35,7 +58,7 @@ export default function View() {
         {product ? (
           <>
             <div>
-              <img src={OrganizationImage} alt="" height={100} width={100} />
+              <img src={`../../server/public/uploads/${product.productImage}`} alt="" height={100} width={100} />
             </div>
             <div>
               <h1>{product.productName}</h1>
@@ -52,7 +75,6 @@ export default function View() {
               <h4>Organization Name:</h4>
               <p>{product.organizationName}</p>
             </div>
-            {/* Display all other fields dynamically */}
             <div>
               <h4>Created At:</h4>
               <p>{product.createdAt}</p>
@@ -61,11 +83,29 @@ export default function View() {
               <h4>Updated At:</h4>
               <p>{product.updatedAt}</p>
             </div>
-            <div>
-              <h4>Expiry Date:</h4>
-              <p>{product.expiryDate}</p>
-            </div>
-            {/* Add more fields as needed */}
+            {(product.categoryName === 'vegetable-wastes' || product.categoryName === 'fruit-wastes') && (
+              <>
+                <div>
+                  <h4>Expiry Date:</h4>
+                  <p>{product.expiryDate}</p>
+                </div>
+                {userType === 'seller' && (
+                  <>
+                    {expired ? (
+                      <div>
+                        <h4>Product Expired!</h4>
+                        <button onClick={handleSellNow}>Sell Now</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <h4>Days Remaining until Expiry:</h4>
+                        <p>{daysRemaining}</p>
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            )}
           </>
         ) : (
           <p>Loading...</p>
