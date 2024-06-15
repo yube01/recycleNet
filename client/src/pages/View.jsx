@@ -8,7 +8,7 @@ export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-  const [product, setProduct] = useState(null); 
+  const [product, setProduct] = useState(null);
   const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
   const [expired, setExpired] = useState(false); // State to track if product is expired
 
@@ -104,6 +104,7 @@ export default function View() {
 
   return (
     <>
+      <Nav />
       <div className="product-details-container">
         {product ? (
           <>

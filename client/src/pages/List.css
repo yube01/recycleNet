@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #388e3c;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+input[type="file"] {
+  display: block;
+  margin: 20px 0;
+  padding: 10px;
+  border: 2px solid #388e3c;
+  border-radius: 4px;
+  background-color: #e8f5e9;
+  color: #388e3c;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+button {
+  background-color: #388e3c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2e7d32;
+}
+
+img {
+  display: block;
+  margin: 20px 0;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.MuiTextField-root {
+  margin-bottom: 20px !important;
+}
+
+.MuiFormControl-root {
+  margin-bottom: 20px !important;
+}
+
+.MuiButton-contained {
+  background-color: #388e3c !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: #2e7d32 !important;
+}
