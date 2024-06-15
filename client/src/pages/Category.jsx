@@ -16,7 +16,6 @@ export default function Category() {
       try {
         const response = await axios.get(
           `http://localhost:9000/product/catSellConfirm/${name}`
-
         );
         const data = response.data;
         console.log("response", data);
@@ -32,6 +31,7 @@ export default function Category() {
   }, [name]);
   return (
     <>
+      <Nav />
       <div className="home-container">
         {/* <div className="content-container"> */}
         <div className="flex-container">

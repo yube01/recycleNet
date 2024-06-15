@@ -1,33 +1,25 @@
+import { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import Nav from "../components/Nav";
-import { useNavigate } from "react-router-dom";
+import "./Sellnow.css"; // Import the CSS file
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Sellnow = () => {
-  const userType = JSON.parse(localStorage.getItem("userData")).userType;
-  console.log(userType);
-  const navigate = useNavigate();
   const [file, setFile] = useState(null);
+  const navigate = useNavigate();
   const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadedFilePath, setUploadedFilePath] = useState("");
 
-  useEffect(() => {
-    if (userType === "buyer") {
-      navigate("/buy");
-    }
-  }, [userType, navigate]);
-
   const initialValues = {
     name: "",
     category: "",
     weight: "",
-    expirationDate: "",
   };
 
   const handleFileInputChange = (e) => {
@@ -95,12 +87,9 @@ const Sellnow = () => {
       userId: id,
       quantity: values.weight,
       categoryName: values.category,
-
       productName: values.name,
       productImage: uploadedFilePath,
-      sellConfirm: true,
     };
-    console.log("Dara", sendData);
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {
         method: "POST",
@@ -110,6 +99,9 @@ const Sellnow = () => {
         body: JSON.stringify(sendData),
       });
       const data = await response.json();
+      if (response.ok) {
+        navigate("/home");
+      }
       console.log(data);
     } catch (error) {
       console.log("error", error);
@@ -119,7 +111,8 @@ const Sellnow = () => {
 
   return (
     <>
-      <div>
+      <Nav />
+      <div className="container">
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>
           <input type="file" onChange={handleFileInputChange} />
@@ -130,64 +123,66 @@ const Sellnow = () => {
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
         )}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error">{error}</p>}
         {success && (
-          <p style={{ color: "green" }}>
+          <p className="success">
             File uploaded successfully! Path: {uploadedFilePath}
           </p>
         )}
       </div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Field
-              as={TextField}
-              id="name"
-              name="name"
-              label="Name"
-              variant="outlined"
-              error={touched.name && Boolean(errors.name)}
-              helperText={touched.name && errors.name}
-              fullWidth
-            />
-            <Field
-              as={TextField}
-              select
-              id="category"
-              name="category"
-              label="Category"
-              variant="outlined"
-              error={touched.category && Boolean(errors.category)}
-              helperText={touched.category && errors.category}
-              fullWidth
-            >
-              <MenuItem value="" disabled>
-                Select category
-              </MenuItem>
-              <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
-            </Field>
-            <Field
-              as={TextField}
-              id="weight"
-              name="weight"
-              label="Weight (kg)"
-              variant="outlined"
-              type="number"
-              error={touched.weight && Boolean(errors.weight)}
-              helperText={touched.weight && errors.weight}
-              fullWidth
-            />
-            <Button type="submit" variant="contained">
-              Submit
-            </Button>
-          </Form>
-        )}
-      </Formik>
+      <div className="container">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <Field
+                as={TextField}
+                id="name"
+                name="name"
+                label="Name"
+                variant="outlined"
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
+                fullWidth
+              />
+              <Field
+                as={TextField}
+                select
+                id="category"
+                name="category"
+                label="Category"
+                variant="outlined"
+                error={touched.category && Boolean(errors.category)}
+                helperText={touched.category && errors.category}
+                fullWidth
+              >
+                <MenuItem value="" disabled>
+                  Select category
+                </MenuItem>
+                <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
+              </Field>
+              <Field
+                as={TextField}
+                id="weight"
+                name="weight"
+                label="Weight (kg)"
+                variant="outlined"
+                type="number"
+                error={touched.weight && Boolean(errors.weight)}
+                helperText={touched.weight && errors.weight}
+                fullWidth
+              />
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </>
   );
 };

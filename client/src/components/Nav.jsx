@@ -34,7 +34,7 @@ const Navbar = () => {
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">
-        {userType !== "buyer" && (
+        {userType !== "buyer" && userType && (
           <>
             <a href="/sellnow" className="nav-item">
               Sell Now

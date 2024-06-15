@@ -11,6 +11,7 @@ import recycle from "../assets/recylces.png";
 export default function Landing() {
   return (
     <>
+      <Nav />
       <div className="container">
         <Hero />
         <div className="card-container">

@@ -1,6 +1,7 @@
 import SideBar from "../components/SideBar";
 
 import ProductCard from "../components/ProductCard";
+import Nav from "../components/Nav";
 // import '../components/Home.css';
 import "../components/Home.css";
 import { useEffect, useState } from "react";
@@ -27,26 +28,28 @@ export default function Buy() {
   }, []); // Empty dependency array ensures useEffect runs only once on component mount
 
   return (
-    <div style={{ dispay: "flex" }}>
-      {/* <Navbar /> */}
-      <div className="home-container">
-        <SideBar />
-        <div className="content-container">
-          <div className="flex-container">
-            {products.map((product) => (
-              <ProductCard
-                key={product._id}
-                productName={product.productName}
-                categoryName={product.categoryName}
-                sellerName={product.sellerName}
-                productId={product._id}
-                // Assuming sellerName is available in your data structure
-                // Add more props as needed based on your data structure
-              />
-            ))}
+    <>
+      <Nav />
+      <div style={{ dispay: "flex" }}>
+        <div className="home-container">
+          <SideBar />
+          <div className="content-container">
+            <div className="flex-container">
+              {products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  productName={product.productName}
+                  categoryName={product.categoryName}
+                  sellerName={product.sellerName}
+                  productId={product._id}
+                  // Assuming sellerName is available in your data structure
+                  // Add more props as needed based on your data structure
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

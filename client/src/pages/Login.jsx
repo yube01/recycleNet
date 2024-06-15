@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import image from "../assets/logo.jpg";
 import "./Login.css";
 import { useState } from "react";
+import Nav from "../components/Nav";
 
 const initialValues = {
   email: "",
@@ -85,7 +86,7 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
+      <Nav />
       <div
         style={{
           display: "flex",
