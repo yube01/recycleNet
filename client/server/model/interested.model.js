@@ -13,6 +13,10 @@ const interested = new mongoose.Schema({
     sellerId:{
         type:String,
         required:true
+    },
+    status:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps:true

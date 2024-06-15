@@ -10,6 +10,7 @@ import image from "../assets/logo.jpg";
 import "./Login.css";
 import { useState } from "react";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 const initialValues = {
   email: "",
@@ -99,15 +100,14 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div className="login">
       <Nav />
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "70vh",
-          backgroundColor: "#E8F5E9",
+          maxHeight: "70vh",
         }}
       >
         <div
@@ -183,6 +183,7 @@ export default function Login() {
           </Formik>
         </div>
       </div>
-    </>
+      <Footer/>
+    </div>
   );
 }

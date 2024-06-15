@@ -2,3 +2,11 @@
   color: #065216; /* Change to desired hover color */
   text-decoration: underline;
 }
+
+.login{
+  display: flex;
+  max-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}

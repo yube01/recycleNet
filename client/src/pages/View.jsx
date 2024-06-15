@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { sellConfirm } from "../../server/controller/product.controller";
-
+import "./View.css"
 export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
