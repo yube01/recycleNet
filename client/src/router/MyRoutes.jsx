@@ -18,7 +18,7 @@ export default function MyRoutes() {
         <Route path="/list" element={<List />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/view/:id" element={<View />} />
+        <Route path="/view/" element={<View />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/category/" element={<Category/>}/>
 
