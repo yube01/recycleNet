@@ -1,13 +1,67 @@
 import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
+import axios from "axios"
+import { useState } from "react";
+
+
 
 const BiodegradableProductForm = () => {
+  const [file, setFile] = useState(null);
+  const [previewSource, setPreviewSource] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [uploadedFilePath, setUploadedFilePath] = useState('');
   const initialValues = {
     name: "",
     category: "",
     weight: "",
     expirationDate: "",
+  };
+ 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const handleSubmitFile = async (e) => {
+    e.preventDefault();
+    if (!file) return;
+    uploadImage(file);
+  };
+
+  const uploadImage = async (file) => {
+    setUploading(true);
+    setError('');
+    setSuccess(false);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await axios.post('http://localhost:9000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log('File uploaded successfully:', response.data);
+      setUploadedFilePath(response.data.filePath);
+      setUploading(false);
+      setSuccess(true);
+    } catch (err) {
+      console.error('Error uploading file:', err);
+      setError('Error uploading file');
+      setUploading(false);
+    }
   };
 
   const validationSchema = Yup.object({
@@ -28,6 +82,9 @@ const BiodegradableProductForm = () => {
       categoryName: values.category,
       expiryDate: values.expirationDate,
       productName: values.name,
+      productImage:uploadedFilePath
+      
+
     };
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {
@@ -46,6 +103,29 @@ const BiodegradableProductForm = () => {
   };
 
   return (
+<>
+<div>
+    <h1>Upload File</h1>
+    <form onSubmit={handleSubmitFile}>
+      <input type="file" onChange={handleFileInputChange} />
+      <button type="submit" disabled={uploading}>
+        {uploading ? 'Uploading...' : 'Upload'}
+      </button>
+    </form>
+    {previewSource && (
+      <img
+        src={previewSource}
+        alt="chosen"
+        style={{ height: '300px' }}
+      />
+    )}
+    {error && <p style={{ color: 'red' }}>{error}</p>}
+    {success && (
+      <p style={{ color: 'green' }}>
+        File uploaded successfully! Path: {uploadedFilePath}
+      </p>
+    )}
+  </div>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -108,7 +188,9 @@ const BiodegradableProductForm = () => {
           </Button>
         </Form>
       )}
+ 
     </Formik>
+</>
   );
 };
 
