@@ -6,12 +6,22 @@ import { useState } from "react";
 import Nav from "../components/Nav";
 
 const Sellnow = () => {
+  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  console.log(userType);
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadedFilePath, setUploadedFilePath] = useState("");
+
+  useEffect(() => {
+    if (userType === 'buyer') {
+      navigate('/buy');
+    }
+  }, [userType, navigate]);
+
   const initialValues = {
     name: "",
     category: "",
@@ -87,6 +97,7 @@ const Sellnow = () => {
 
       productName: values.name,
       productImage: uploadedFilePath,
+      sellConfirm: true
     };
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {

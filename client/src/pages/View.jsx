@@ -1,3 +1,4 @@
+import axios from "axios";
 import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -6,10 +7,14 @@ export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-  const [product, setProduct] = useState(null); // State to store product details
-  const userType = JSON.parse(localStorage.getItem("userData")).userType;
+  const [product, setProduct] = useState(null); 
   const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
   const [expired, setExpired] = useState(false); // State to track if product is expired
+
+  // Retrieve userType from localStorage
+  const userData = localStorage.getItem("userData");
+  const userType = userData ? JSON.parse(userData).userType : null;
+  console.log(userType);
 
   useEffect(() => {
     const fetchProduct = async () => {

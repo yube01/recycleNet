@@ -6,6 +6,14 @@ import { useState } from "react";
 import Nav from "../components/Nav";
 
 const BiodegradableProductForm = () => {
+  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  console.log(userType)
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userType === 'buyer') {
+      navigate('/buy');
+    }
+  }, [userType, navigate]);
   const [file, setFile] = useState(null);
   const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);
