@@ -6,7 +6,7 @@ export default function App() {
     <>
       {/* <Nav /> */}
       <MyRoutes />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

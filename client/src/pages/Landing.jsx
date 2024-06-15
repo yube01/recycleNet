@@ -12,25 +12,24 @@ export default function Landing() {
   return (
     <>
       <Nav />
-      <div className="container">
-        <Hero />
-        <div className="card-container">
-          <Card
-            imagePath={alert}
-            heading="Alert Expiration"
-            paragraph="Alert before your stocks gets stale."
-          />
-          <Card
-            imagePath={connect}
-            heading="Connect"
-            paragraph="Network with people who find value in your waste.  "
-          />
-          <Card
-            imagePath={recycle}
-            heading="Recycle"
-            paragraph="Reduce the waste and sustain environment."
-          />
-        </div>
+
+      <Hero />
+      <div className="card-container">
+        <Card
+          imagePath={alert}
+          heading="Alert Expiration"
+          paragraph="Alert before your stocks gets stale."
+        />
+        <Card
+          imagePath={connect}
+          heading="Connect"
+          paragraph="Network with people who find value in your waste.  "
+        />
+        <Card
+          imagePath={recycle}
+          heading="Recycle"
+          paragraph="Reduce the waste and sustain environment."
+        />
       </div>
     </>
   );

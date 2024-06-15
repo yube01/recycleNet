@@ -8,17 +8,15 @@ const Hero = () => {
     <section className="hero">
       <div className="hero-text">
         <h1>
-          <span>Recycle</span>Net
+          Recycle<span style={{ color: "black" }}>Net</span>
         </h1>
         <p>
           <b>
             <i>RecycleNet </i>
           </b>
-          helps you track and manage your biodegradable materials, preventing
-          waste and expiration. <br />
-          Connect with eco-conscious individuals who can repurpose and recycle
-          your organic waste, contributing to a greener, more sustainable
-          future.
+          helps you connect with eco-conscious individuals who can repurpose and
+          recycle your organic waste, contributing to a greener, more
+          sustainable future.
         </p>
         <div>
           <button className="getStart">Get Started</button>
