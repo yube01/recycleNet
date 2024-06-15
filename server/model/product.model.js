@@ -33,6 +33,18 @@ const product = new mongoose.Schema(
     productImage:{
       type:String,
       required:true
+    },
+    isAlerted:{
+      type:Boolean,
+      default:false
+    },
+    sellConfirm:{
+      type:Boolean,
+      default:false
+    },
+    isExpired:{
+      type:Boolean,
+      default:false
     }
   },
   {
