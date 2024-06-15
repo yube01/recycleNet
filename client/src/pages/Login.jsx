@@ -67,7 +67,7 @@ export default function Login() {
       });
       const data = await response.json();
       console.log(data);
-      localStorage.setItem("id", JSON.stringify(data));
+      localStorage.setItem("userData", JSON.stringify(data));
       navigate("/home");
       console.log("values", values);
     } catch (error) {
