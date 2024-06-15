@@ -1,10 +1,9 @@
-import Navbar from "../components/NavBar";
 import SideBar from "../components/SideBar";
-import Nav from "../components/Nav";
+
 import ProductCard from "../components/ProductCard";
 // import '../components/Home.css';
 import "../components/Home.css";
-import { useEffect ,useState} from "react";
+import { useEffect, useState } from "react";
 
 export default function Buy() {
   const [products, setProducts] = useState([]);
@@ -13,12 +12,9 @@ export default function Buy() {
     const fetchProducts = async () => {
       try {
         const id = JSON.parse(localStorage.getItem("userData"))._id;
-        const response = await fetch(
-          `http://localhost:9000/product/`,
-          {
-            method: "GET",
-          }
-        );
+        const response = await fetch(`http://localhost:9000/product/`, {
+          method: "GET",
+        });
         const data = await response.json();
         console.log(data);
         setProducts(data); // Update state with fetched product data

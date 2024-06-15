@@ -15,7 +15,7 @@ const Navbar = () => {
       const parsedUserData = JSON.parse(userData);
       setIsUserLoggedIn(true);
       setUserType(parsedUserData.userType);
-      console.log('Navbar console', parsedUserData.userType);
+      console.log("Navbar console", parsedUserData.userType);
     }
   }, []);
 
@@ -33,7 +33,7 @@ const Navbar = () => {
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">
-        {isUserLoggedIn && userType !== 'buyer' && (
+        {isUserLoggedIn && userType !== "buyer" && (
           <>
             <a href="/sellnow" className="nav-item">
               Sell Now
