@@ -20,3 +20,19 @@ export const addInterested = async(req,res)=>{
     }
 
 }
+
+
+export const interestedBuyer = async(req,res)=>{
+    const {sellerId} = req.params
+    try {
+
+        const data = await Interested.find({sellerId})
+        res.status(200).json(data)
+
+
+        
+    } catch (error) {
+        console.log(error)
+        
+    }
+}
