@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import View from "../pages/View";
 import Landing from "../pages/Landing";
+import Category from "../pages/Category";
 export default function MyRoutes() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ export default function MyRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/view/:id" element={<View />} />
         <Route path="/landing" element={<Landing />} />
+        <Route path="/category/" element={<Category/>}/>
 
         <Route path="*" element={<NotFound />} />
       </Routes>
