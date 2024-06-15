@@ -32,11 +32,12 @@ export const addProduct = async (req, res) => {
 };
 
 export const getProductById = async(req,res)=>{
-  const {userId} = req.params
+  const {id} = req.params
 
   try {
-    const data = await Product.find(userId)
+    const data = await Product.find({userId:id})
     res.status(200).json(data)
+
     
   } catch (error) {
     console.log(error)
@@ -70,3 +71,5 @@ export const getProductDetail = async(req,res)=>{
     
   }
 }
+
+
