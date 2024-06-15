@@ -102,3 +102,12 @@ res.status(200).json(data);
     console.log(error)
   }
 }
+
+export const allSellConfirmTrue = async(req,res)=>{
+  try {
+    const data = await Product.find({ sellConfirm: true });
+res.status(200).json(data);
+  } catch (error) {
+    console.log(error)
+  }
+}
