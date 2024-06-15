@@ -58,7 +58,7 @@ const BiodegradableProductForm = () => {
       const filePath = response.data.filePath;
       const fileName = filePath.split("\\").pop().split("/").pop();
       console.log("File uploaded successfully:", fileName);
-      setUploadedFilePath(response.data.filePath);
+      setUploadedFilePath(response.data.fileName);
       setUploading(false);
       setSuccess(true);
     } catch (err) {
