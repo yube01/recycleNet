@@ -4,6 +4,7 @@ import Nav from "../components/Nav";
 import ProductCard from "../components/ProductCard";
 // import '../components/Home.css';
 import "../components/Home.css";
+import { useEffect ,useState} from "react";
 
 export default function Buy() {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,7 @@ export default function Buy() {
       try {
         const id = JSON.parse(localStorage.getItem("userData"))._id;
         const response = await fetch(
-          `http://localhost:9000/product/userId/${id}`,
+          `http://localhost:9000/product/`,
           {
             method: "GET",
           }
@@ -32,7 +33,6 @@ export default function Buy() {
   return (
     <div style={{ dispay: "flex" }}>
       {/* <Navbar /> */}
-      <Nav />
       <div className="home-container">
         <SideBar />
         <div className="content-container">

@@ -3,15 +3,25 @@ import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
-import Nav from '../components/Nav'
+import Nav from "../components/Nav";
 
 const Sellnow = () => {
+  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  console.log(userType);
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadedFilePath, setUploadedFilePath] = useState("");
+
+  useEffect(() => {
+    if (userType === 'buyer') {
+      navigate('/buy');
+    }
+  }, [userType, navigate]);
+
   const initialValues = {
     name: "",
     category: "",
@@ -76,7 +86,6 @@ const Sellnow = () => {
       .required("Required")
       .positive("Must be positive")
       .integer("Must be an integer"),
-   
   });
 
   const handleSubmit = async (values) => {
@@ -85,9 +94,10 @@ const Sellnow = () => {
       userId: id,
       quantity: values.weight,
       categoryName: values.category,
-      
+
       productName: values.name,
       productImage: uploadedFilePath,
+      sellConfirm: true
     };
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {
@@ -107,7 +117,6 @@ const Sellnow = () => {
 
   return (
     <>
-    <Nav/>
       <div>
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>
