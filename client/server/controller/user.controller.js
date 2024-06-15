@@ -19,7 +19,7 @@ export const register = async(req,res)=>{
 
         const newUser = new User({name,email,password:hash,phone,userType,address})
 
-        const user = await newUser.save()
+        await newUser.save()
         res.status(200).json("User created")
 
 
