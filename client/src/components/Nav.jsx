@@ -5,19 +5,32 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
-  // Check if there is user data in localStorage
-  const userData = localStorage.getItem("userData");
-  const userType = JSON.parse(userData).userType;
+  const [userType, setUserType] = useState(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      try {
+        const parsedUserData = JSON.parse(userData);
+        if (parsedUserData && parsedUserData.userType) {
+          setUserType(parsedUserData.userType);
+          console.log(userType);
+        }
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    }
+  }, []);
 
   const handleLogout = () => {
-    // Remove user data from localStorage
     localStorage.removeItem("userData");
+    setUserType(null);
   };
 
   return (
     <nav className="navbar">
       <div className="logo">
-        <img src={logo} alt="" height="60px" />
+        <img src={logo} alt="Logo" height="60px" />
         <a href="/">Recycle Net</a>
       </div>
       <div className="nav-menu">

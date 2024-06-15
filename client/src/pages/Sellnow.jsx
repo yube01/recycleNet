@@ -2,7 +2,9 @@ import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Nav from "../components/Nav";
+import { useNavigate } from "react-router-dom";
 
 const Sellnow = () => {
   const userType = JSON.parse(localStorage.getItem("userData")).userType;
@@ -98,6 +100,7 @@ const Sellnow = () => {
       productImage: uploadedFilePath,
       sellConfirm: true,
     };
+    console.log("Dara", sendData);
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {
         method: "POST",
