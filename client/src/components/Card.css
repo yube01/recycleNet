@@ -3,9 +3,9 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 9rem; /* Set width to 9rem */
-  height: 10rem; /* Set height to 10rem */
+  box-shadow: 0 2px 4px rgba(15, 15, 15, 0.5); /* Add shadow */
+  width: 15rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,7 +17,7 @@
 }
 
 .icon img {
-  width: 50px; /* Adjust size as needed */
+  width: 50px;
 }
 
 h3 {

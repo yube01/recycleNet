@@ -8,7 +8,11 @@ export default function Landing() {
     <>
       <Nav />
       <Hero />
-      <Card />
+      <Card
+        imagePath="path-to-recycle-icon.png"
+        heading="Sustainability"
+        paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel mauris eget arcu fermentum congue sed sed libero."
+      />
     </>
   );
 }

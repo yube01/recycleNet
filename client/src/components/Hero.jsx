@@ -1,6 +1,7 @@
 // Hero.js
 import React from "react";
 import "./Hero.css";
+import recycle from "../assets/recycle.jpg";
 
 const Hero = () => {
   return (
@@ -11,11 +12,7 @@ const Hero = () => {
         </h1>
       </div>
       <div className="hero-image">
-        <img
-          src="path-to-your-image.png"
-          alt="Recycle Animation"
-          className="animate-image"
-        />
+        <img src={recycle} alt="Recycle Animation" className="animate-image" />
       </div>
     </section>
   );

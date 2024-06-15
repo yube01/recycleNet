@@ -8,7 +8,7 @@ export default function Home() {
       {/* <Navbar /> */}
       <Nav />
       {/* <SideBar /> */}
-      {/* <ProductCard /> */}
+      <ProductCard />
     </>
   );
 }

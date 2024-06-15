@@ -2,17 +2,16 @@
 import React from "react";
 import "./Card.css";
 
-const Card = () => {
+const Card = (props) => {
+  const { imagePath, heading, paragraph } = props;
+
   return (
     <div className="card">
       <div className="icon">
-        <img src="path-to-recycle-icon.png" alt="Recycle Icon" />
+        <img src={imagePath} alt="Recycle Icon" />
       </div>
-      <h3>Sustainability</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel
-        mauris eget arcu fermentum congue sed sed libero.
-      </p>
+      <h3>{heading}</h3>
+      <p>{paragraph}</p>
     </div>
   );
 };
