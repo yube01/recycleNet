@@ -8,6 +8,7 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import image from "../assets/logo.jpg";
 import "./Login.css";
+import { useState } from "react";
 
 const initialValues = {
   email: "",
@@ -50,6 +51,7 @@ const GreenTextField = styled(TextField)({
 
 export default function Login() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   useEffect(() => {
     if (localStorage.getItem("userData")) {
       navigate("/home");
@@ -66,9 +68,15 @@ export default function Login() {
         body: JSON.stringify(values),
       });
       const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem("userData", JSON.stringify(data));
+        navigate("/home");
+      } else {
+        setError(data.message || "Authentication failed");
+      }
       console.log(data);
-      localStorage.setItem("userData", JSON.stringify(data));
-      navigate("/home");
+      // localStorage.setItem("userData", JSON.stringify(data));
+      // navigate("/home");
       console.log("values", values);
     } catch (error) {
       console.error("Api call Error: ", error);

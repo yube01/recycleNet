@@ -89,12 +89,12 @@ export const sellConfirm = async (req, res) => {
 export const sellConfirmTrue = async (req, res) => {
   const { cat } = req.params;
   try {
-    const data = await Product.find({ categoryName:cat});
-    if(data){
-      const data1 = await Product.find({sellConfirm: true })
-      res.status(200).json(data1);
-    }
-    
+    const data = await Product.find({       $and: [
+        { categoryName: cat },
+        { sellConfirm: true }
+      ]})
+    res.status(200).json(data)
+  
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Server error' });
