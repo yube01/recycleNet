@@ -4,7 +4,10 @@ import mongoose from "mongoose"
 import authRoute from "./routes/user.route.js"
 import productRoute from "./routes/product.route.js"
 import cors from 'cors'
+import multer from "multer"
+import path from "path"
 
+import nodemailer from "nodemailer"
 dotenv.config()
 
 const app = express()
@@ -13,8 +16,66 @@ app.use(cors({
 }))
 
 app.use(express.json())
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // Append extension
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  try {
+    res.status(200).json({ message: 'File uploaded successfully', filePath: req.file.path });
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to upload file' });
+  }
+});
 
 
+
+  // Create a Nodemailer transporter using SMTP
+const transporter = nodemailer.createTransport({
+    service: 'gmail', // Use your email service (e.g., Gmail, Outlook, etc.)
+    auth: {
+      user: 'yubraja46@gmail.com', // Replace with your email
+      pass: process.env.GMAIL, // Replace with your email password or app password
+    },
+  });
+  
+  // Verify the transporter configuration
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error('Error with email transporter:', error);
+    } else {
+      console.log('Email transporter is ready to send messages');
+    }
+  });
+  
+  // Route to send email
+  app.post('/send-email', (req, res) => {
+    const {  subject, text, html } = req.body;
+  
+    // Define the email options
+    const mailOptions = {
+      from: 'yubraja46@gmail.com', // Sender address
+      to:"yubrajadhikari2019@gmail.com", // List of recipients
+      subject, // Subject line
+      text, // Plain text body
+      html, // HTML body
+    };
+  
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return res.status(500).send(`Error sending email: ${error.message}`);
+      }
+      res.status(200).send(`Email sent: ${info.response}`);
+    });
+  });
 
 app.use("/auth",authRoute)
 app.use("/product",productRoute)

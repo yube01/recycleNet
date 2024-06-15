@@ -9,6 +9,7 @@ export const product = async (req, res) => {
     categoryName,
     userId,
     expiryDate,
+    productImage
   } = req.body;
 
   try {
@@ -20,10 +21,11 @@ export const product = async (req, res) => {
       categoryName,
       userId,
       expiryDate,
+      productImage
     });
 
     const user = await newUser.save();
-    res.status(200).json("Product Added");
+    res.status(200).json(user);
   } catch (error) {
     console.log(error);
   }

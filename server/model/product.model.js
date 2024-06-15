@@ -30,6 +30,10 @@ const product = new mongoose.Schema(
       type: String,
       required: false,
     },
+    productImage:{
+      type:String,
+      required:true
+    }
   },
   {
     timestamps: true,
