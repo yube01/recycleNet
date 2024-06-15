@@ -8,6 +8,9 @@ export default function View() {
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get('id');
   const [product, setProduct] = useState(null); // State to store product details
+  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
+  const [expired, setExpired] = useState(false); // State to track if product is expired
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -18,6 +21,22 @@ export default function View() {
         const data = await response.json();
         console.log('response', data);
         setProduct(data); // Update state with fetched product data
+
+        // Calculate days remaining until expiry if userType is 'seller'
+        if (userType === 'seller') {
+          const expiryDate = new Date(data.expiryDate);
+          const currentDate = new Date();
+          const differenceInTime = expiryDate.getTime() - currentDate.getTime();
+          const days = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+          setDaysRemaining(days);
+
+          // Check if product is expired
+          if (expiryDate < currentDate) {
+            setExpired(true);
+          } else {
+            setExpired(false);
+          }
+        }
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -26,7 +45,15 @@ export default function View() {
     if (id) {
       fetchProduct();
     }
-  }, [id]);
+  }, [id, userType]);
+
+  const handleSellNow = async() => {
+    // Implement logic to handle "Sell Now" action
+      const response = await fetch(``,{
+        method: ''
+      })
+    console.log('Sell Now clicked',id);
+  };
 
   return (
     <>
@@ -52,7 +79,6 @@ export default function View() {
               <h4>Organization Name:</h4>
               <p>{product.organizationName}</p>
             </div>
-            {/* Display all other fields dynamically */}
             <div>
               <h4>Created At:</h4>
               <p>{product.createdAt}</p>
@@ -65,7 +91,21 @@ export default function View() {
               <h4>Expiry Date:</h4>
               <p>{product.expiryDate}</p>
             </div>
-            {/* Add more fields as needed */}
+            {userType === 'seller' && (
+              <>
+                {expired ? (
+                  <div>
+                    <h4>Product Expired!</h4>
+                    <button onClick={handleSellNow}>Sell Now</button>
+                  </div>
+                ) : (
+                  <div>
+                    <h4>Days Remaining until Expiry:</h4>
+                    <p>{daysRemaining}</p>
+                  </div>
+                )}
+              </>
+            )}
           </>
         ) : (
           <p>Loading...</p>

@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ productName, categoryName, sellerName,productId }) => {
+
   return (
     <Card className="product-card">
       <CardContent>
