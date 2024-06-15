@@ -1,25 +1,19 @@
+import { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
-import { useState } from "react";
 import Nav from "../components/Nav";
+import "./List.css"; // Import the CSS file
 
 const BiodegradableProductForm = () => {
-  const userType = JSON.parse(localStorage.getItem('userData')).userType;
-  console.log(userType)
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (userType === 'buyer') {
-      navigate('/buy');
-    }
-  }, [userType, navigate]);
   const [file, setFile] = useState(null);
   const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadedFilePath, setUploadedFilePath] = useState("");
+
   const initialValues = {
     name: "",
     category: "",
@@ -68,7 +62,6 @@ const BiodegradableProductForm = () => {
       const fileName = filePath.split("/").pop();
       console.log("File uploaded successfully:", fileName);
       setUploadedFilePath(fileName);
-      console.log(uploadedFilePath);
       setUploading(false);
       setSuccess(true);
     } catch (err) {
@@ -116,7 +109,8 @@ const BiodegradableProductForm = () => {
 
   return (
     <>
-      <div>
+      <Nav />
+      <div className="container">
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>
           <input type="file" onChange={handleFileInputChange} />
@@ -127,76 +121,78 @@ const BiodegradableProductForm = () => {
         {previewSource && (
           <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
         )}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error">{error}</p>}
         {success && (
-          <p style={{ color: "green" }}>
+          <p className="success">
             File uploaded successfully! Path: {uploadedFilePath}
           </p>
         )}
       </div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Field
-              as={TextField}
-              id="name"
-              name="name"
-              label="Name"
-              variant="outlined"
-              error={touched.name && Boolean(errors.name)}
-              helperText={touched.name && errors.name}
-              fullWidth
-            />
-            <Field
-              as={TextField}
-              select
-              id="category"
-              name="category"
-              label="Category"
-              variant="outlined"
-              error={touched.category && Boolean(errors.category)}
-              helperText={touched.category && errors.category}
-              fullWidth
-            >
-              <MenuItem value="" disabled>
-                Select category
-              </MenuItem>
-              <MenuItem value="vegetable-wastes">Vegetable Wastes</MenuItem>
-              <MenuItem value="fruit-wastes">Fruit Wastes</MenuItem>
-              <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
-            </Field>
-            <Field
-              as={TextField}
-              id="weight"
-              name="weight"
-              label="Weight (kg)"
-              variant="outlined"
-              type="number"
-              error={touched.weight && Boolean(errors.weight)}
-              helperText={touched.weight && errors.weight}
-              fullWidth
-            />
-            <Field
-              as={TextField}
-              id="expirationDate"
-              name="expirationDate"
-              variant="outlined"
-              type="date"
-              error={touched.expirationDate && Boolean(errors.expirationDate)}
-              helperText={touched.expirationDate && errors.expirationDate}
-              fullWidth
-            />
-            <Button type="submit" variant="contained">
-              Submit
-            </Button>
-          </Form>
-        )}
-      </Formik>
+      <div className="container">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <Field
+                as={TextField}
+                id="name"
+                name="name"
+                label="Name"
+                variant="outlined"
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
+                fullWidth
+              />
+              <Field
+                as={TextField}
+                select
+                id="category"
+                name="category"
+                label="Category"
+                variant="outlined"
+                error={touched.category && Boolean(errors.category)}
+                helperText={touched.category && errors.category}
+                fullWidth
+              >
+                <MenuItem value="" disabled>
+                  Select category
+                </MenuItem>
+                <MenuItem value="vegetable-wastes">Vegetable Wastes</MenuItem>
+                <MenuItem value="fruit-wastes">Fruit Wastes</MenuItem>
+                <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
+              </Field>
+              <Field
+                as={TextField}
+                id="weight"
+                name="weight"
+                label="Weight (kg)"
+                variant="outlined"
+                type="number"
+                error={touched.weight && Boolean(errors.weight)}
+                helperText={touched.weight && errors.weight}
+                fullWidth
+              />
+              <Field
+                as={TextField}
+                id="expirationDate"
+                name="expirationDate"
+                variant="outlined"
+                type="date"
+                error={touched.expirationDate && Boolean(errors.expirationDate)}
+                helperText={touched.expirationDate && errors.expirationDate}
+                fullWidth
+              />
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </>
   );
 };

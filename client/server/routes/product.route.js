@@ -9,7 +9,7 @@ router.get("/category/:categoryName", getProductByCategory);
 router.get("/productDetail/:productId", getProductDetail);
 
 
-router.put("/sellConfirm/:productId",sellConfirm)
+router.get("/sellConfirm/:cat",sellConfirm)
 router.put("/allSellConfirm/:productId",allSellConfirmTrue)
 router.get("/catSellConfirm/:cat",sellConfirmTrue)
 
