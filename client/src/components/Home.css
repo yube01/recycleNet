@@ -12,11 +12,13 @@
   display: flex;
   flex-wrap: wrap; /* Ensure products wrap to next line if space is insufficient */
   gap: 1rem;
-  justify-content: space-between; /* Distribute items evenly with equal space between them */
+  justify-content: center; /* Distribute items evenly with equal space between them */
 }
 
 .product-card {
-  width: calc(25% - 1rem); /* Set width to 25% of parent width minus gap space */
+  width: calc(
+    25% - 1rem
+  ); /* Set width to 25% of parent width minus gap space */
   margin-bottom: 1rem; /* Add spacing between product cards */
   /* Add additional styling as needed for ProductCard */
 }

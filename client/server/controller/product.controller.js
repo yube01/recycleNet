@@ -9,7 +9,7 @@ export const addProduct = async (req, res) => {
     categoryName,
     userId,
     expiryDate,
-    productImage
+    productImage,
   } = req.body;
 
   try {
@@ -21,7 +21,7 @@ export const addProduct = async (req, res) => {
       categoryName,
       userId,
       expiryDate,
-      productImage
+      productImage,
     });
 
     const user = await newUser.save();
@@ -31,43 +31,35 @@ export const addProduct = async (req, res) => {
   }
 };
 
-export const getProductById = async(req,res)=>{
-  const {id} = req.params
-
-
-  try {
-    const data = await Product.find({userId:id})
-    res.status(200).json(data)
-    
-  } catch (error) {
-    console.log(error)
-    
-  }
-}
-
-export const getProductByCategory = async(req,res)=>{
-  const {categoryName} = req.params
+export const getProductById = async (req, res) => {
+  const { id } = req.params;
 
   try {
-    const data = await Product.find({categoryName})
-    res.status(200).json(data)
-    
+    const data = await Product.find({ userId: id });
+    res.status(200).json(data);
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
-}
+};
 
-
-export const getProductDetail = async(req,res)=>{
-  const {productId} = req.params
+export const getProductByCategory = async (req, res) => {
+  const { categoryName } = req.params;
 
   try {
-    const data = await Product.findById(productId)
-    res.status(200).json(data)
-    
+    const data = await Product.find({ categoryName });
+    res.status(200).json(data);
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
-}
+};
+
+export const getProductDetail = async (req, res) => {
+  const { productId } = req.params;
+
+  try {
+    const data = await Product.findById(productId);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
