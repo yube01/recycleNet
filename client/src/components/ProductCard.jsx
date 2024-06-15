@@ -1,35 +1,36 @@
-// ProductCard.js
 import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardActions,
-  Button,
-} from "@mui/material";
+import "./ProductCard.css";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ productName, categoryName, sellerName, productId }) => {
+const ProductCard = ({
+  productName,
+  categoryName,
+  // sellerName,
+  productId,
+  productImage,
+}) => {
   return (
-    <Card className="product-card">
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {productName}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Category: {categoryName}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Seller: {sellerName}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">
-          <Link to={`/view?id=${productId}`}>View More</Link>
-        </Button>{" "}
-        {/* Add Link to view product details */}
-      </CardActions>
-    </Card>
+    <div className="product-card">
+      <img
+        src={`../../server/public/uploads/${productImage}`}
+        alt={`${productName}`}
+        className="product-card-image"
+      />
+      <div className="product-card-content">
+        <p className="product-card-category">
+          <span style={{ color: "#d6a03b" }}>Category </span>
+          <span>{categoryName}</span>
+        </p>
+        <h5 className="product-card-title">{productName}</h5>
+
+        {/* <p className="product-card-seller">Seller: {sellerName}</p> */}
+      </div>
+      <div className="product-card-actions">
+        <Link to={`/view?id=${productId}`} className="product-card-button">
+          VIEW MORE
+        </Link>
+      </div>
+    </div>
   );
 };
 
