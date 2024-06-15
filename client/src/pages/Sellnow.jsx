@@ -3,10 +3,9 @@ import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
-import Nav from "../components/Nav";
 
 const Sellnow = () => {
-  const userType = JSON.parse(localStorage.getItem('userData')).userType;
+  const userType = JSON.parse(localStorage.getItem("userData")).userType;
   console.log(userType);
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
@@ -17,8 +16,8 @@ const Sellnow = () => {
   const [uploadedFilePath, setUploadedFilePath] = useState("");
 
   useEffect(() => {
-    if (userType === 'buyer') {
-      navigate('/buy');
+    if (userType === "buyer") {
+      navigate("/buy");
     }
   }, [userType, navigate]);
 
@@ -97,7 +96,7 @@ const Sellnow = () => {
 
       productName: values.name,
       productImage: uploadedFilePath,
-      sellConfirm: true
+      sellConfirm: true,
     };
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {
