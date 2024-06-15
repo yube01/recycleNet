@@ -121,7 +121,6 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
       <div className="home-container">
         {/* <div className="content-container"> */}
         <div className="flex-container">

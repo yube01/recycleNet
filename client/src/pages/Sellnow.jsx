@@ -3,7 +3,7 @@ import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
-import Nav from '../components/Nav'
+import Nav from "../components/Nav";
 
 const Sellnow = () => {
   const [file, setFile] = useState(null);
@@ -76,7 +76,6 @@ const Sellnow = () => {
       .required("Required")
       .positive("Must be positive")
       .integer("Must be an integer"),
-   
   });
 
   const handleSubmit = async (values) => {
@@ -85,7 +84,7 @@ const Sellnow = () => {
       userId: id,
       quantity: values.weight,
       categoryName: values.category,
-      
+
       productName: values.name,
       productImage: uploadedFilePath,
     };
@@ -107,7 +106,6 @@ const Sellnow = () => {
 
   return (
     <>
-    <Nav/>
       <div>
         <h1>Upload File</h1>
         <form onSubmit={handleSubmitFile}>
