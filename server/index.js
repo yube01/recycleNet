@@ -4,7 +4,8 @@ import mongoose from "mongoose"
 import authRoute from "./routes/user.route.js"
 import productRoute from "./routes/product.route.js"
 import cors from 'cors'
-
+import multer from "multer"
+import path from "path"
 
 import nodemailer from "nodemailer"
 dotenv.config()
@@ -15,7 +16,24 @@ app.use(cors({
 }))
 
 app.use(express.json())
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // Append extension
+  },
+});
 
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  try {
+    res.status(200).json({ message: 'File uploaded successfully', filePath: req.file.path });
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to upload file' });
+  }
+});
 
 
 
