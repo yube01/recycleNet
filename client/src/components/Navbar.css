@@ -17,7 +17,11 @@ body {
   box-sizing: border-box;
   height: 5rem;
 }
-
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
 .logo a {
   text-decoration: none;
   color: #4caf50; /* Green color for the logo text */

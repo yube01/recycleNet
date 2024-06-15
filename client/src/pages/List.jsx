@@ -1,25 +1,23 @@
 import { Formik, Field, Form } from "formik";
 import { TextField, MenuItem, Button } from "@mui/material";
 import * as Yup from "yup";
-import axios from "axios"
+import axios from "axios";
 import { useState } from "react";
-
-
 
 const BiodegradableProductForm = () => {
   const [file, setFile] = useState(null);
-  const [previewSource, setPreviewSource] = useState('');
+  const [previewSource, setPreviewSource] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [uploadedFilePath, setUploadedFilePath] = useState('');
+  const [uploadedFilePath, setUploadedFilePath] = useState("");
   const initialValues = {
     name: "",
     category: "",
     weight: "",
     expirationDate: "",
   };
- 
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -42,24 +40,28 @@ const BiodegradableProductForm = () => {
 
   const uploadImage = async (file) => {
     setUploading(true);
-    setError('');
+    setError("");
     setSuccess(false);
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
-      const response = await axios.post('http://localhost:9000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      const response = await axios.post(
+        "http://localhost:9000/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
-      console.log('File uploaded successfully:', response.data);
+      );
+      console.log("File uploaded successfully:", response.data);
       setUploadedFilePath(response.data.filePath);
       setUploading(false);
       setSuccess(true);
     } catch (err) {
-      console.error('Error uploading file:', err);
-      setError('Error uploading file');
+      console.error("Error uploading file:", err);
+      setError("Error uploading file");
       setUploading(false);
     }
   };
@@ -75,16 +77,14 @@ const BiodegradableProductForm = () => {
   });
 
   const handleSubmit = async (values) => {
-    const id = JSON.parse(localStorage.getItem("id"))._id;
+    const id = JSON.parse(localStorage.getItem("userData"))._id;
     const sendData = {
       userId: id,
       quantity: values.weight,
       categoryName: values.category,
       expiryDate: values.expirationDate,
       productName: values.name,
-      productImage:uploadedFilePath
-      
-
+      productImage: uploadedFilePath,
     };
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {
@@ -103,94 +103,89 @@ const BiodegradableProductForm = () => {
   };
 
   return (
-<>
-<div>
-    <h1>Upload File</h1>
-    <form onSubmit={handleSubmitFile}>
-      <input type="file" onChange={handleFileInputChange} />
-      <button type="submit" disabled={uploading}>
-        {uploading ? 'Uploading...' : 'Upload'}
-      </button>
-    </form>
-    {previewSource && (
-      <img
-        src={previewSource}
-        alt="chosen"
-        style={{ height: '300px' }}
-      />
-    )}
-    {error && <p style={{ color: 'red' }}>{error}</p>}
-    {success && (
-      <p style={{ color: 'green' }}>
-        File uploaded successfully! Path: {uploadedFilePath}
-      </p>
-    )}
-  </div>
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ errors, touched }) => (
-        <Form>
-          <Field
-            as={TextField}
-            id="name"
-            name="name"
-            label="Name"
-            variant="outlined"
-            error={touched.name && Boolean(errors.name)}
-            helperText={touched.name && errors.name}
-            fullWidth
-          />
-          <Field
-            as={TextField}
-            select
-            id="category"
-            name="category"
-            label="Category"
-            variant="outlined"
-            error={touched.category && Boolean(errors.category)}
-            helperText={touched.category && errors.category}
-            fullWidth
-          >
-            <MenuItem value="" disabled>
-              Select category
-            </MenuItem>
-            <MenuItem value="vegetable-wastes">Vegetable Wastes</MenuItem>
-            <MenuItem value="fruit-wastes">Fruit Wastes</MenuItem>
-            <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
-            <MenuItem value="other">Other</MenuItem>
-          </Field>
-          <Field
-            as={TextField}
-            id="weight"
-            name="weight"
-            label="Weight (kg)"
-            variant="outlined"
-            type="number"
-            error={touched.weight && Boolean(errors.weight)}
-            helperText={touched.weight && errors.weight}
-            fullWidth
-          />
-          <Field
-            as={TextField}
-            id="expirationDate"
-            name="expirationDate"
-            variant="outlined"
-            type="date"
-            error={touched.expirationDate && Boolean(errors.expirationDate)}
-            helperText={touched.expirationDate && errors.expirationDate}
-            fullWidth
-          />
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
-        </Form>
-      )}
- 
-    </Formik>
-</>
+    <>
+      <div>
+        <h1>Upload File</h1>
+        <form onSubmit={handleSubmitFile}>
+          <input type="file" onChange={handleFileInputChange} />
+          <button type="submit" disabled={uploading}>
+            {uploading ? "Uploading..." : "Upload"}
+          </button>
+        </form>
+        {previewSource && (
+          <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+        )}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && (
+          <p style={{ color: "green" }}>
+            File uploaded successfully! Path: {uploadedFilePath}
+          </p>
+        )}
+      </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <Field
+              as={TextField}
+              id="name"
+              name="name"
+              label="Name"
+              variant="outlined"
+              error={touched.name && Boolean(errors.name)}
+              helperText={touched.name && errors.name}
+              fullWidth
+            />
+            <Field
+              as={TextField}
+              select
+              id="category"
+              name="category"
+              label="Category"
+              variant="outlined"
+              error={touched.category && Boolean(errors.category)}
+              helperText={touched.category && errors.category}
+              fullWidth
+            >
+              <MenuItem value="" disabled>
+                Select category
+              </MenuItem>
+              <MenuItem value="vegetable-wastes">Vegetable Wastes</MenuItem>
+              <MenuItem value="fruit-wastes">Fruit Wastes</MenuItem>
+              <MenuItem value="paper-wastes">Paper Wastes</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </Field>
+            <Field
+              as={TextField}
+              id="weight"
+              name="weight"
+              label="Weight (kg)"
+              variant="outlined"
+              type="number"
+              error={touched.weight && Boolean(errors.weight)}
+              helperText={touched.weight && errors.weight}
+              fullWidth
+            />
+            <Field
+              as={TextField}
+              id="expirationDate"
+              name="expirationDate"
+              variant="outlined"
+              type="date"
+              error={touched.expirationDate && Boolean(errors.expirationDate)}
+              helperText={touched.expirationDate && errors.expirationDate}
+              fullWidth
+            />
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </>
   );
 };
 
