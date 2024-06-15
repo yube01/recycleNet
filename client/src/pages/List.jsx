@@ -53,7 +53,9 @@ const BiodegradableProductForm = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      console.log('File uploaded successfully:', response.data);
+      const filePath = response.data.filePath;
+      const fileName = filePath.split('\\').pop().split('/').pop();
+      console.log('File uploaded successfully:', fileName);
       setUploadedFilePath(response.data.filePath);
       setUploading(false);
       setSuccess(true);
