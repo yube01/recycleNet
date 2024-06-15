@@ -60,12 +60,12 @@ transporter.verify((error, success) => {
 
 // Route to send email
 app.post("/send-email", (req, res) => {
-  const { subject, text, html } = req.body;
+  const { to,subject, text, html } = req.body;
 
   // Define the email options
   const mailOptions = {
     from: "yubraja46@gmail.com", // Sender address
-    to: "yubrajadhikari2019@gmail.com", // List of recipients
+    to, // List of recipients
     subject, // Subject line
     text, // Plain text body
     html, // HTML body
