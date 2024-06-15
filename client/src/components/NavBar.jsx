@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "./Navbar.css";
 import {
   AppBar,
   Toolbar,
@@ -7,9 +8,11 @@ import {
   Badge,
   Menu,
   MenuItem,
+  Button,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,6 +23,11 @@ const Navbar = () => {
 
   const handleNotificationClose = () => {
     setAnchorEl(null);
+  };
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("id"); // Remove the "id" from localStorage
+    navigate("/login"); // Redirect to the login page
   };
 
   return (
@@ -57,6 +65,9 @@ const Navbar = () => {
               Notification 4
             </MenuItem>
           </Menu>
+          <Button color="inherit" onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
       </Toolbar>
     </AppBar>
