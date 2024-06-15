@@ -3,4 +3,5 @@
   justify-content: center; /* Adjust as needed */
   gap: 6rem;
   background: linear-gradient(90deg, #e8e4dc, #f7fcdf, #dbf4eb, #f4ebd6);
+  padding-bottom: 2rem;
 }
