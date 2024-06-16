@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sellConfirm } from "../../server/controller/product.controller";
-import "./View.css";
+import './View.css'
 export default function View() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -93,13 +93,14 @@ export default function View() {
   };
 
   const handleInterested = async () => {
-    const getId = JSON.parse(localStorage.getItem("userData"))._id;
-    const values = {
-      buyerId: getId,
-      sellerId: product.userId,
-      productId: id,
-    };
-    console.log("VAles", values);
+    const getId = JSON.parse(localStorage.getItem('userData'))._id
+    console.log('give product id',product.product.userId)
+  const values =  {
+    buyerId: getId,
+    sellerId:product.product.userId,
+    productId:id
+  }
+  console.log("VAles",values)
     // Implement logic to handle "I'm interested" action
     const response = await axios.post(
       `http://localhost:9000/interest/addInterested`,

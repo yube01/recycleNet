@@ -4,7 +4,7 @@ import { addInterested, interestedBuyer } from "../controller/interested.control
 const router = express.Router();
 
 router.post("/addInterested",addInterested);
-router.get("/interestedBuyer/:sellerId",interestedBuyer)
+router.get("/interestedBuyer/:userId",interestedBuyer)
 
 
 export default router
