@@ -12,6 +12,7 @@ export const addProduct = async (req, res) => {
     productImage,
   } = req.body;
 
+
   try {
     const newUser = new Product({
       productName,
@@ -22,6 +23,7 @@ export const addProduct = async (req, res) => {
       userId,
       expiryDate,
       productImage,
+
     });
 
     const user = await newUser.save();
@@ -148,3 +150,37 @@ export const setListTrue = async(req,res)=>{
     console.log(error);
   }
 }
+
+export const setProductTrue = async (req, res) => {
+  const {
+    productName,
+    quantity,
+    address,
+    contact,
+    categoryName,
+    userId,
+    expiryDate,
+    productImage,
+    sellConfirm
+  } = req.body;
+ 
+
+  try {
+    const newUser = new Product({
+      productName,
+      quantity,
+      address,
+      contact,
+      categoryName,
+      userId,
+      expiryDate,
+      productImage,
+      sellConfirm,
+    });
+
+    const user = await newUser.save();
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};

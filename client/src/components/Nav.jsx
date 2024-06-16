@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
+  const [responseData,setResponseData] = useState('');
   let userId;
   const handleClose = () => setOpen(false);
   const [userType, setUserType] = useState(null);
@@ -29,7 +30,7 @@ const Navbar = () => {
   }, [JSON.parse(localStorage.getItem("userData"))]);
 
   const handleOpen = async() => {
-    // console.log('User Id',id)
+    console.log('User Id',userId)
     try{
       const response = await fetch(`http://localhost:9000/interest/interestedBuyer/${userId}`,{
         method:'GET'
@@ -37,6 +38,7 @@ const Navbar = () => {
       const data = await response.json()
       // console.log(data)
       console.log("Datas: ",data)
+      setResponseData(data);
     }catch(error){
       console.error('Error',error)
     }
@@ -111,12 +113,24 @@ const Navbar = () => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Interested Buyer
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          {responseData ? (
+        responseData.map((noti, index) => (
+          <Typography key={index} id="modal-modal-description" sx={{ mt: 2 }}>
+            {noti.buyerInfo.name} is interested in {noti.productInfo.productName}
+            <br />
+            {noti.buyerInfo.name} phone number is {noti.buyerInfo.phone}
+            <br />
+            {noti.buyerInfo.name} email is {noti.buyerInfo.email}
+            
+            <hr />
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+        ))
+      ) : (
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          No Notification
+        </Typography>
+      )}
+
         </Box>
       </Modal>
     </nav>

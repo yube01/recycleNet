@@ -89,9 +89,11 @@ const Sellnow = () => {
       categoryName: values.category,
       productName: values.name,
       productImage: uploadedFilePath,
+      sellConfirm: true,
     };
+    console.log('')
     try {
-      const response = await fetch("http://localhost:9000/product/addProduct", {
+      const response = await fetch("http://localhost:9000/product/setProductTrue", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,6 +101,7 @@ const Sellnow = () => {
         body: JSON.stringify(sendData),
       });
       const data = await response.json();
+      console.log('SEtTrue response:',data)
       if (response.ok) {
         navigate("/home");
       }
