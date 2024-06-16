@@ -102,8 +102,15 @@ export default function Register() {
   };
 
   return (
-    <div style={{ maxWidth:"100vw",display:"flex",flexDirection:"column",gap:"1rem"}}>
-    <Nav/>
+    <div
+      style={{
+        maxWidth: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+      }}
+    >
+      <Nav />
       <div
         style={{
           display: "flex",
@@ -138,7 +145,7 @@ export default function Register() {
                     fullWidth
                   />
                 </Box>
-                <Box >
+                <Box>
                   <Field
                     as={GreenTextField}
                     id="email"
@@ -235,7 +242,6 @@ export default function Register() {
           </Formik>
         </WhiteBackground>
       </div>
-      <Footer/>
     </div>
   );
 }
