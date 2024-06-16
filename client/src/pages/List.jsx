@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import Nav from "../components/Nav";
 import "./List.css"; // Import the CSS file
+import { useNavigate } from "react-router-dom";
 
 const BiodegradableProductForm = () => {
   const [file, setFile] = useState(null);
@@ -13,6 +14,7 @@ const BiodegradableProductForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [uploadedFilePath, setUploadedFilePath] = useState("");
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
@@ -100,6 +102,9 @@ const BiodegradableProductForm = () => {
         body: JSON.stringify(sendData),
       });
       const data = await response.json();
+      if (response.ok) {
+        navigate("/home");
+      }
       console.log(data);
     } catch (error) {
       console.log("error", error);

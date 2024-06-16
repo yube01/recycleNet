@@ -1,7 +1,7 @@
 import axios from "axios";
 import Nav from "../components/Nav";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { sellConfirm } from "../../server/controller/product.controller";
 import './View.css'
 export default function View() {
@@ -11,15 +11,16 @@ export default function View() {
   const [product, setProduct] = useState(null);
   const [daysRemaining, setDaysRemaining] = useState(null); // State to store days remaining until expiry
   const [expired, setExpired] = useState(false); // State to track if product is expired
+  const navigate = useNavigate();
 
   // Retrieve userType from localStorage
   const userData = localStorage.getItem("userData");
   const userType = JSON.parse(userData).userType;
   console.log("User Type:", userType);
   let boolCheck = false;
-  if (userType === 'buyer') {
+  if (userType === "buyer") {
     boolCheck = true;
-    console.log('checked true')
+    console.log("checked true");
   }
 
   useEffect(() => {
@@ -62,24 +63,32 @@ export default function View() {
       fetchProduct();
     }
   }, [id]);
-  
+
   const handleSellNow = async () => {
     // Implement logic to handle "Sell Now" action
     const sellItem = {
-      productName :product.productName ,
-      quantity:product.quantity,
-      categoryName:product.categoryName,
-      userId:product.userId,
-      productImage:product.productImage,
-      sellConfirm:true
+      productName: product.productName,
+      quantity: product.quantity,
+      categoryName: product.categoryName,
+      userId: product.userId,
+      productImage: product.productImage,
+      sellConfirm: true,
+    };
+    console.log("Test Object", sellItem);
+    const response = await axios.put(
+      `http://localhost:9000/product/setListTrue/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 200) {
+      navigate("/home");
+    } else {
+      setError("Failed to sell item");
     }
-    console.log('Test Object',sellItem)
-    const response = await axios.put(`http://localhost:9000/product/setListTrue/${id}`,{
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    console.log('Item Sold',response.data)
+    console.log("Item Sold", response.data);
     console.log("Sell Now clicked", id);
   };
 
@@ -93,12 +102,16 @@ export default function View() {
   }
   console.log("VAles",values)
     // Implement logic to handle "I'm interested" action
-    const response = await axios.post(`http://localhost:9000/interest/addInterested`,values,{
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    console.log('Request Sent',response.data)
+    const response = await axios.post(
+      `http://localhost:9000/interest/addInterested`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Request Sent", response.data);
 
     console.log("I'm interested clicked", id);
   };
@@ -162,16 +175,13 @@ export default function View() {
                     )}
                   </>
                 )}
-
-             
               </>
             )}
-               {boolCheck && (
-                  <div>
-                    
-                    <button onClick={handleInterested}>Im interested</button>
-                  </div>
-                )}
+            {boolCheck && (
+              <div>
+                <button onClick={handleInterested}>Im interested</button>
+              </div>
+            )}
           </>
         ) : (
           <p>Loading...</p>

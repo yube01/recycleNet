@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard"; // Assuming ProductCard component is properly defined
 import axios from "axios";
+import "./Buy.css";
 
 export default function Category() {
   const [searchParams] = useSearchParams();
@@ -33,23 +34,24 @@ export default function Category() {
     <>
       <Nav />
       <div className="home-container">
-        {/* <div className="content-container"> */}
-        <div className="flex-container">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              productName={product.productName}
-              categoryName={product.categoryName}
-              // sellerName={product.sellerName}
-              productId={product._id}
-              // Assuming sellerName is available in your data structure
-              // Add more props as needed based on your data structure
-            />
-          ))}
+        <Sidebar />
+        <div className="content-container">
+          <div className="flex-container">
+            {products.map((product) => (
+              <ProductCard
+                key={product._id}
+                productName={product.productName}
+                categoryName={product.categoryName}
+                // sellerName={product.sellerName}
+                productId={product._id}
+                productImage={product.productImage}
+                // Assuming sellerName is available in your data structure
+                // Add more props as needed based on your data structure
+              />
+            ))}
+          </div>
         </div>
-        {/* </div> */}
       </div>
-      <Sidebar />
     </>
   );
 }

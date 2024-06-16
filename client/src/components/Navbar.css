@@ -14,7 +14,7 @@ body {
   background-color: white;
   padding: 10px 120px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100vw; /* Full width of the viewport */
+  width: 100%; /* Full width of the viewport */
   box-sizing: border-box;
   height: 7rem;
   position: sticky;

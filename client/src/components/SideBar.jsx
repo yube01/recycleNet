@@ -26,9 +26,9 @@ const SideBar = () => {
           width: 240,
           boxSizing: "border-box",
           position: "fixed",
-          top: "4rem", // Adjust based on navbar height
+          top: "7rem", // Adjust based on navbar height
           left: 0,
-          height: "calc(100% - 4rem)",
+          height: "calc(74% - 4rem)",
         },
       }}
     >

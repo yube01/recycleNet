@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import image from "../assets/logo.jpg";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 const initialValues = {
   name: "",
@@ -101,14 +102,20 @@ export default function Register() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        maxWidth: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+      }}
+    >
+      <Nav />
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "90vh",
-          backgroundColor: "#E8F5E9",
         }}
       >
         <WhiteBackground>
@@ -126,7 +133,7 @@ export default function Register() {
                     style={{ width: "100px", height: "100px" }}
                   />
                 </div>
-                <Box mb={2}>
+                <Box>
                   <Field
                     as={GreenTextField}
                     id="name"
@@ -138,7 +145,7 @@ export default function Register() {
                     fullWidth
                   />
                 </Box>
-                <Box mb={2}>
+                <Box>
                   <Field
                     as={GreenTextField}
                     id="email"
@@ -150,7 +157,7 @@ export default function Register() {
                     fullWidth
                   />
                 </Box>
-                <Box mb={2}>
+                <Box>
                   <Field
                     as={GreenTextField}
                     id="password"
@@ -163,7 +170,7 @@ export default function Register() {
                     fullWidth
                   />
                 </Box>
-                <Box mb={2}>
+                <Box>
                   <Field
                     as={GreenTextField}
                     id="phone"
@@ -176,7 +183,7 @@ export default function Register() {
                     fullWidth
                   />
                 </Box>
-                <Box mb={2}>
+                <Box>
                   <Field
                     as={GreenTextField}
                     id="address"
@@ -188,7 +195,7 @@ export default function Register() {
                     fullWidth
                   />
                 </Box>
-                <Box mb={2}>
+                <Box>
                   <Field name="userType">
                     {({ field }) => (
                       <RadioGroup {...field} row>
@@ -235,6 +242,6 @@ export default function Register() {
           </Formik>
         </WhiteBackground>
       </div>
-    </>
+    </div>
   );
 }

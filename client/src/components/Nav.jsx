@@ -60,6 +60,15 @@ const Navbar = () => {
     p: 4,
   };
 
+  // scroll down for about us
+  const scrollToAboutUs = (event) => {
+    event.preventDefault();
+    const aboutUsSection = document.getElementById("about-us");
+    if (aboutUsSection) {
+      aboutUsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -82,7 +91,7 @@ const Navbar = () => {
             </div>
           </>
         )}
-        <a href="/about" className="nav-item">
+        <a href="#about-us" className="nav-item" onClick={scrollToAboutUs}>
           About Us
         </a>
         {userType ? (

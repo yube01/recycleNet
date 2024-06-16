@@ -4,4 +4,10 @@
   gap: 6rem;
   background: linear-gradient(90deg, #e8e4dc, #f7fcdf, #dbf4eb, #f4ebd6);
   padding-bottom: 2rem;
+  width: 100%;
+}
+
+.container {
+  width: 100wv;
+  padding: 0;
 }
