@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import image from "../assets/logo.jpg";
 import Nav from "../components/Nav";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from "../components/Footer";
 
 const initialValues = {
@@ -97,6 +99,7 @@ export default function Register() {
       console.log("Response:", response.data);
       navigate("/login");
     } catch (error) {
+      toast.error(error.response.data)
       console.error("Api call Error: ", error.response.data);
     }
   };
@@ -242,6 +245,9 @@ export default function Register() {
           </Formik>
         </WhiteBackground>
       </div>
+      <ToastContainer position="top-right" />
+      <br />
     </div>
+    
   );
 }

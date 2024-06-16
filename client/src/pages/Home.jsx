@@ -1,4 +1,3 @@
-// Home.js
 import React, { useState, useEffect } from "react";
 import "../components/Home.css"; // Import CSS for styling
 import Nav from "../components/Nav";
@@ -19,6 +18,7 @@ export default function Home() {
         );
         const data = await response.json();
         console.log(data);
+
         setProducts(data); // Update state with fetched product data
         checkExpiryDates(data);
       } catch (error) {
@@ -28,6 +28,7 @@ export default function Home() {
 
     fetchProducts();
   }, []); // Empty dependency array ensures useEffect runs only once on component mount
+
   async function checkExpiryDates(dataArray) {
     // Iterate through each item in the dataArray
     for (let i = 0; i < dataArray.length; i++) {
@@ -62,6 +63,7 @@ export default function Home() {
       }
     }
   }
+
   async function sendEmailNotification(
     productName,
     daysUntilExpiry,
@@ -90,6 +92,7 @@ export default function Home() {
       console.log("Error sending email:", error);
     }
   }
+
   async function isExpiredEmailNotification(
     productName,
     daysUntilExpiry,
@@ -125,19 +128,23 @@ export default function Home() {
       <div className="home-container">
         <div className="content-container">
           <div className="flex-container">
-            {products.map((product) => (
-              <ProductCard
-                key={product._id}
-                productName={product.productName}
-                categoryName={product.categoryName}
-                // sellerName={product.sellerName}
-                productId={product._id}
-                productImage={product.productImage}
-                sellConfirm={product.sellConfirm}
-                // Assuming sellerName is available in your data structure
-                // Add more props as needed based on your data structure
-              />
-            ))}
+            {products.length === 0 ? (
+              <div style={{fontSize:'2rem'}}>No items for sale</div>
+            ) : (
+              products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  productName={product.productName}
+                  categoryName={product.categoryName}
+                  // sellerName={product.sellerName}
+                  productId={product._id}
+                  productImage={product.productImage}
+                  sellConfirm={product.sellConfirm}
+                  // Assuming sellerName is available in your data structure
+                  // Add more props as needed based on your data structure
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

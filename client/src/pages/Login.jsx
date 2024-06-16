@@ -11,6 +11,9 @@ import "./Login.css";
 import { useState } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { GiTwoShadows } from "react-icons/gi";
 
 const initialValues = {
   email: "",
@@ -89,13 +92,21 @@ export default function Login() {
         }
       } else {
         setError(data.message || "Authentication failed");
+        
+      }
+      if(data === 'This user doesnt exists'){
+        toast.error('User doesnt exists')
+      }else if(data === 'Password doesnt match'){
+        toast.error('Password is Incorrect')
       }
       console.log(data);
+      // console.log(response.json())
       // localStorage.setItem("userData", JSON.stringify(data));
       // navigate("/home");
       console.log("values", values);
     } catch (error) {
       console.error("Api call Error: ", error);
+      
     }
   };
 
@@ -183,6 +194,8 @@ export default function Login() {
           </Formik>
         </div>
       </div>
+      <br />
+      <ToastContainer position="top-right" />
     </div>
   );
 }

@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import Nav from "../components/Nav";
 import "./List.css"; // Import the CSS file
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 
 const BiodegradableProductForm = () => {
@@ -103,7 +105,10 @@ const BiodegradableProductForm = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        navigate("/home");
+        toast.success('Product Added succesfully')
+        setTimeout(() => {
+          navigate("/home");
+        }, 1500);
       }
       console.log(data);
     } catch (error) {
@@ -195,7 +200,9 @@ const BiodegradableProductForm = () => {
             </Form>
           )}
         </Formik>
+
       </div>
+      <ToastContainer position="top-right"/>
     </>
   );
 };

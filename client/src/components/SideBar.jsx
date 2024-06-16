@@ -1,4 +1,3 @@
-// SideBar.js
 import React from "react";
 import {
   Drawer,
@@ -9,10 +8,13 @@ import {
   Divider,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import HomeIcon from "@mui/icons-material/Home";
-import { FaBeer } from "react-icons/fa"; // Corrected import
+import GrassIcon from '@mui/icons-material/Grass';
+import { GiFruiting } from "react-icons/gi";
+import { RxCrumpledPaper } from "react-icons/rx";
+import WineBarIcon from '@mui/icons-material/WineBar';
+
+const iconStyle = { fontSize: "24px", color: "inherit" };
 
 const SideBar = () => {
   return (
@@ -28,34 +30,40 @@ const SideBar = () => {
           position: "fixed",
           top: "7rem", // Adjust based on navbar height
           left: 0,
-          height: "calc(74% - 4rem)",
+          height: "calc(100% - 4rem)",
         },
       }}
     >
       <List>
         <ListItem button component={Link} to="/">
           <ListItemIcon>
-            <HomeIcon />
+            <HomeIcon style={iconStyle} />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
         <ListItem button component={Link} to="/category?name=vegetable-wastes">
           <ListItemIcon>
-            <FaBeer style={{ fontSize: "24px", color: "inherit" }} />
+            <GrassIcon style={iconStyle} />
           </ListItemIcon>
-          <ListItemText primary="Plastic Waste" />
+          <ListItemText primary="Vegetable Wastes" />
         </ListItem>
         <ListItem button component={Link} to="/category?name=fruit-wastes">
           <ListItemIcon>
-            <InboxIcon />
+            <GiFruiting style={iconStyle} />
           </ListItemIcon>
-          <ListItemText primary="Paper Waste" />
+          <ListItemText primary="Fruit Wastes" />
         </ListItem>
         <ListItem button component={Link} to="/category?name=paper-wastes">
           <ListItemIcon>
-            <MailIcon />
+            <RxCrumpledPaper style={iconStyle} />
           </ListItemIcon>
-          <ListItemText primary="Bio-Degradable Waste" />
+          <ListItemText primary="Paper Wastes" />
+        </ListItem>
+        <ListItem button component={Link} to="/category?name=other">
+          <ListItemIcon>
+            <WineBarIcon style={iconStyle} />
+          </ListItemIcon>
+          <ListItemText primary="Others" />
         </ListItem>
       </List>
       <Divider />
