@@ -183,7 +183,6 @@ export default function Login() {
           </Formik>
         </div>
       </div>
-      <Footer/>
     </div>
   );
 }
