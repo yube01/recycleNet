@@ -82,7 +82,7 @@ export default function Home() {
             to: email, // Assuming 'email' is a variable containing the recipient's email address
             subject: "Expiry Alert",
             text: `${productName} expires in ${daysUntilExpiry} days.`,
-            html: `<p>Product expired <br> ${productName} expires in ${daysUntilExpiry} days.</p>`, // HTML content for the email body
+            html: `<p>Product: ${productName} expires in ${daysUntilExpiry} days.</p>`, // HTML content for the email body
           }),
         }
       );
@@ -109,9 +109,9 @@ export default function Home() {
           },
           body: JSON.stringify({
             to: email, // Assuming 'email' is a variable containing the recipient's email address
-            subject: "Already expired",
-            text: `${productName} expires in ${daysUntilExpiry} days.`,
-            html: `<p>Product expired <br> ${productName} expires in ${daysUntilExpiry} days.</p>`, // HTML content for the email body
+            subject: `${productName} expiredd!!`,
+            text: `${productName} expired ${daysUntilExpiry} days ago.`,
+            html: `<p>Product: ${productName} expired ${daysUntilExpiry} days ago.</p>`, // HTML content for the email body
           }),
         }
       );
@@ -129,7 +129,7 @@ export default function Home() {
         <div className="content-container">
           <div className="flex-container">
             {products.length === 0 ? (
-              <div style={{fontSize:'2rem'}}>No items for sale</div>
+              <div style={{ fontSize: "2rem" }}>No items for sale</div>
             ) : (
               products.map((product) => (
                 <ProductCard
