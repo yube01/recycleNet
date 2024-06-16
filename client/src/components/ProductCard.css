@@ -8,6 +8,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better aesthetics */
   background-color: #fff; /* Background color for the card */
   font-family: "Poppins", sans-serif;
+  height: 400px;
+  
 }
 
 .product-card img {

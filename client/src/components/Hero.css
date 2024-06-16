@@ -72,7 +72,7 @@ body {
   position: absolute;
   right: 1rem;
   opacity: 0;
-  transition: opacity 0.3s ease, right 0.3s ease-in;
+  transition: opacity 1s ease, right 1s ease-in-out;
 }
 
 .getStart:hover {

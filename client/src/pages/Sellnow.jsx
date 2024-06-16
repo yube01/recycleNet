@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import Nav from "../components/Nav";
 import "./Sellnow.css"; // Import the CSS file
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Sellnow = () => {
@@ -102,8 +104,12 @@ const Sellnow = () => {
       });
       const data = await response.json();
       console.log('SEtTrue response:',data)
+
       if (response.ok) {
-        navigate("/home");
+        toast.success('Product Added succesfully')
+        setTimeout(() => {
+          navigate("/home");
+        }, 1500);
       }
       console.log(data);
     } catch (error) {
@@ -186,6 +192,7 @@ const Sellnow = () => {
           )}
         </Formik>
       </div>
+      <ToastContainer position="top-right"/>
     </>
   );
 };

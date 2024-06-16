@@ -38,10 +38,10 @@ export const login = async(req,res)=>{
 
         const user = await User.findOne({email:req.body.email})
 
-        if(!user) return res.status(404).json("User hasnot been created")
+        if(!user) return res.status(500).json("This user doesnt exists")
 
         const cpassword = await bcrypt.compare(req.body.password,user.password)
-        if(!cpassword) return res.status(400).json("Password Incorrect")
+        if(!cpassword) return res.status(500).json("Password doesnt match")
 
         const token = jwt.sign({id:user._id},process.env.KEY)
 
