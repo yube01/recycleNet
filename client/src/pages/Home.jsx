@@ -133,6 +133,7 @@ export default function Home() {
                 // sellerName={product.sellerName}
                 productId={product._id}
                 productImage={product.productImage}
+                sellConfirm={product.sellConfirm}
                 // Assuming sellerName is available in your data structure
                 // Add more props as needed based on your data structure
               />

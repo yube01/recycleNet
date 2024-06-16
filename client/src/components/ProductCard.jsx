@@ -8,6 +8,7 @@ const ProductCard = ({
   // sellerName,
   productId,
   productImage,
+  sellConfirm,
 }) => {
   return (
     <div className="product-card">
@@ -22,9 +23,14 @@ const ProductCard = ({
           <span>{categoryName}</span>
         </p>
         <h5 className="product-card-title">{productName}</h5>
-
+        {sellConfirm && (
+          <span style={{ border: "2px solid #329d1d", padding: "5px" }}>
+            Enlisted for Sale
+          </span>
+        )}
         {/* <p className="product-card-seller">Seller: {sellerName}</p> */}
       </div>
+
       <div className="product-card-actions">
         <Link to={`/view?id=${productId}`} className="product-card-button">
           VIEW MORE

@@ -1,4 +1,5 @@
 import SideBar from "../components/SideBar";
+import "./Buy.css";
 
 import ProductCard from "../components/ProductCard";
 import Nav from "../components/Nav";
@@ -45,6 +46,7 @@ export default function Buy() {
                   categoryName={product.categoryName}
                   sellerName={product.sellerName}
                   productId={product._id}
+                  productImage={product.productImage}
                   // Assuming sellerName is available in your data structure
                   // Add more props as needed based on your data structure
                 />

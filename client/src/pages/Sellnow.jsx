@@ -89,6 +89,7 @@ const Sellnow = () => {
       categoryName: values.category,
       productName: values.name,
       productImage: uploadedFilePath,
+      sellConfirm: true,
     };
     try {
       const response = await fetch("http://localhost:9000/product/addProduct", {

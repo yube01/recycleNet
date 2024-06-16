@@ -55,11 +55,21 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   useEffect(() => {
-    if (localStorage.getItem("userData")) {
-      navigate("/home");
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      try {
+        const parsedUserData = JSON.parse(userData);
+        if (parsedUserData.userType === "seller") {
+          navigate("/home");
+        } else if (parsedUserData.userType === "buyer") {
+          navigate("/buy");
+        }
+      } catch (error) {
+        setError("Failed to parse user data");
+        console.error("Error parsing user data:", error);
+      }
     }
   }, [navigate]);
-
   const handleSubmit = async (values) => {
     try {
       const response = await fetch("http://localhost:9000/auth/login", {
@@ -72,7 +82,11 @@ export default function Login() {
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem("userData", JSON.stringify(data));
-        navigate("/home");
+        if (data.userType === "seller") {
+          navigate("/home");
+        } else if (data.userType === "buyer") {
+          navigate("/buy");
+        }
       } else {
         setError(data.message || "Authentication failed");
       }
@@ -115,7 +129,10 @@ export default function Login() {
                   <img
                     src={image}
                     alt="Logo"
-                    style={{ width: "100px", height: "100px" }}
+                    style={{
+                      width: "100px",
+                      height: "100px",
+                    }}
                   />
                 </div>
                 <Box mb={2}>
